@@ -4,6 +4,7 @@ CREATE TABLE USER (
   last_name VARCHAR(50),
   customer_number VARCHAR(20)NOT NULL UNIQUE,
   home_address VARCHAR(500),
+  work_address VARCHAR(500),
   phone_number VARCHAR(15),
   national_code VARCHAR(10),
   family_count INT NOT NULL 
@@ -12,7 +13,7 @@ CREATE TABLE USER (
 
 CREATE TABLE ACCOUNT_BALANCE (
   acc_id NOT NULL PRIMARY KEY,
-  createDate DATE,
+  create_Date DATE,
   debit INT,
   credit INT,
   account_balance INT,
