@@ -301,3 +301,806 @@ org.h2.jdbc.JdbcSQLException: Invalid value "0" for parameter "columnIndex" [900
 	at java.lang.reflect.Method.invoke(Method.java:601)
 	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:293)
 	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:51:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+select * from user [42102-191]
+2016-03-21 20:52:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE USER (
+  user_id NOT NULL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  customer_number VARCHAR(20)NOT NULL UNIQUE,
+  home_address VARCHAR(500),
+  work_address VARCHAR(500),
+  phone_number VARCHAR(15),
+  national_code VARCHAR(10),
+  family_count INT NOT NULL 
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:52:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id NOT NULL PRIMARY KEY,
+  create_Date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  user_id INT FOREIGN KEY REFERENCES USER(user_id)
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:52:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE BILL (
+  bill_id NOT NULL PRIMARY KEY,
+  user_id INT FOREIGN KEY REFERENCES USER(user_id)
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:52:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id NOT NULL PRIMARY KEY,
+  create_Date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  user_id INT FOREIGN KEY REFERENCES USER(user_id)
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:52:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE USER (
+  user_id NOT NULL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  customer_number VARCHAR(20)NOT NULL UNIQUE,
+  home_address VARCHAR(500),
+  work_address VARCHAR(500),
+  phone_number VARCHAR(15),
+  national_code VARCHAR(10),
+  family_count INT NOT NULL 
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:52:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE USER (
+  user_id NOT NULL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  customer_number VARCHAR(20) NOT NULL UNIQUE,
+  home_address VARCHAR(500),
+  work_address VARCHAR(500),
+  phone_number VARCHAR(15),
+  national_code VARCHAR(10),
+  family_count INT NOT NULL 
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:53:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE USER (
+  user_id NOT NULL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  customer_number VARCHAR(20) UNIQUE NOT NULL ,
+  home_address VARCHAR(500),
+  work_address VARCHAR(500),
+  phone_number VARCHAR(15),
+  national_code VARCHAR(10),
+  family_count INT NOT NULL 
+) [50004-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:4059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3922)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5864)
+	at org.h2.command.Parser.parseCreate(Parser.java:4217)
+	at org.h2.command.Parser.parsePrepared(Parser.java:360)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:54:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT_BALANCE (
+  ACC_ID INT NOT NULL PRIMARY KEY,
+  CREATE_DATE DATE,
+  DEBIT INT,
+  CREDIT INT,
+  ACCOUNT_BALANCE INT,
+  DESCRIPTION VARCHAR(1000),
+  USER_ID INT FOREIGN[*] KEY REFERENCES USER(USER_ID)
+) "; expected "(, FOR, UNSIGNED, NOT, NULL, AS, DEFAULT, GENERATED, NOT, NULL, AUTO_INCREMENT, BIGSERIAL, SERIAL, IDENTITY, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id INT NOT NULL PRIMARY KEY,
+  create_Date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  user_id INT FOREIGN KEY REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 20:57:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT_BALANCE (
+  ACC_ID INT NOT NULL PRIMARY KEY,
+  CREATE_DATE DATE,
+  DEBIT INT,
+  CREDIT INT,
+  ACCOUNT_BALANCE INT,
+  DESCRIPTION VARCHAR(1000),
+  FOREIGN KEY USER_ID[*] REFERENCES USER(USER_ID)
+) "; expected "("; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id INT NOT NULL PRIMARY KEY,
+  create_date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  FOREIGN KEY user_id REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 20:57:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT_BALANCE (
+  ACC_ID INT NOT NULL PRIMARY KEY,
+  CREATE_DATE DATE,
+  DEBIT INT,
+  CREDIT INT,
+  ACCOUNT_BALANCE INT,
+  DESCRIPTION VARCHAR(1000),
+  FOREIGN KEY /[*](USER_ID) REFERENCES USER(USER_ID)
+) "; expected "("; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id INT NOT NULL PRIMARY KEY,
+  create_date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  FOREIGN KEY /(user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 20:57:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "USER_ID" not found; SQL statement:
+CREATE TABLE ACCOUNT_BALANCE (
+  acc_id INT NOT NULL PRIMARY KEY,
+  create_date DATE,
+  debit INT,
+  credit INT,
+  account_balance INT,
+  description VARCHAR(1000),
+  FOREIGN KEY  (user_id) REFERENCES USER(user_id)
+) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:680)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:74)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:197)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:171)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:98)
+	at org.h2.command.Command.executeUpdate(Command.java:258)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Thread.java:722)
+2016-03-21 20:59:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+  PREVIOUS_DATE[*] DATE,
+  CURRENT_DATE DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT
+) "; expected "INDEX, ON, NOT, DEFERRABLE, NOCHECK, CHECK, ,, )"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT
+) [42001-191]
+2016-03-21 20:59:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID),
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id),
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT
+) [42001-191]
+2016-03-21 21:01:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:05:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:05:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+
+) [42001-191]
+2016-03-21 21:05:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT
+
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT
+
+) [42001-191]
+2016-03-21 21:05:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT
+
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT
+
+) [42001-191]
+2016-03-21 21:05:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT,
+  REDUCTION INT
+
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT,
+  reduction INT
+
+) [42001-191]
+2016-03-21 21:07:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT 
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT 
+) [42001-191]
+2016-03-21 21:07:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT
+) [42001-191]
+2016-03-21 21:07:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT,
+  current_figure INT
+) [42001-191]
+2016-03-21 21:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE,
+  previous_figure INT
+) [42001-191]
+2016-03-21 21:07:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  Current_Date DATE
+) [42001-191]
+2016-03-21 21:08:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT ,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  current_date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT ,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:08:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "BILL" not found; SQL statement:
+drop table BILL [42102-191]
+2016-03-21 21:08:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT ,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_Date DATE,
+  current_date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT ,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:08:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURRENT_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT ,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_date DATE,
+  current_date DATE,
+  previous_figure INT,
+  current_figure INT,
+  cunsumption INT,
+  abonman FLOAT ,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:09:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE BILL (
+  BILL_ID INT NOT NULL PRIMARY KEY,
+  PREVIOUS_DATE DATE,
+  CURRENT_DATE[*] DATE,
+  PREVIOUS_FIGURE INT,
+  CURR_FIGURE INT,
+  CUNSUMPTION INT,
+  ABONMAN FLOAT ,
+  REDUCTION INT,
+  SERVICES INT,
+  COST_WATER INT,
+  COST_BALANCE INT,
+  FINAL_AMOUNT INT,
+  USER_ID INT,
+  FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID)
+) "; expected "identifier"; SQL statement:
+CREATE TABLE BILL (
+  bill_id INT NOT NULL PRIMARY KEY,
+  previous_date DATE,
+  current_date DATE,
+  previous_figure INT,
+  curr_figure INT,
+  cunsumption INT,
+  abonman FLOAT ,
+  reduction INT,
+  services INT,
+  cost_water INT,
+  cost_balance INT,
+  final_amount INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES USER(user_id)
+) [42001-191]
+2016-03-21 21:09:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "BILL" not found; SQL statement:
+drop table BILL [42102-191]
