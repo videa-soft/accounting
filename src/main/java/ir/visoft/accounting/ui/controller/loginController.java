@@ -14,9 +14,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class loginController {
+public class LoginController extends BaseController {
 
-    private static Logger log = Logger.getLogger(loginController.class.getName());
+    private static Logger log = Logger.getLogger(LoginController.class.getName());
 
 
     @FXML
@@ -72,19 +72,9 @@ public class loginController {
             alert.setContentText(content);
             alert.showAndWait();
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Authentication");
-            alert.setHeaderText("Login success");
-            alert.setContentText("You successfully logged in.");
-            alert.showAndWait();
+            changeScene("../view/main.fxml", getStage(event));
         }
     }
 
-    public TextField getUsername() {
-        return username;
-    }
 
-    public void setUsername(TextField username) {
-        this.username = username;
-    }
 }

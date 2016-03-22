@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?scenebuilder-stylesheet login.css?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.visoft.accounting.ui.controller.MainController">
+   <children>
+      <TabPane prefHeight="555.0" prefWidth="734.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Users">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="717.0">
+                     <children>
+                        <TabPane layoutX="100.0" layoutY="-29.0" prefHeight="214.0" prefWidth="263.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Untitled Tab 1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="347.0" prefWidth="450.0" />
+                              </content>
+                            </Tab>
+                            <Tab text="Untitled Tab 2">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                        <TableView fx:id="usersTable" layoutX="26.0" layoutY="63.0" prefHeight="410.0" prefWidth="611.0">
+                          <columns>
+
+                          </columns>
+                        </TableView>
+                        <MenuButton layoutX="26.0" layoutY="23.0" mnemonicParsing="false" text="Actions">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Edit" onAction="#onEdit" />
+                            <MenuItem mnemonicParsing="false" text="Remove" onAction="#onRemove" />
+                          </items>
+                        </MenuButton>
+                        <Button layoutX="599.0" layoutY="23.0" mnemonicParsing="false" text="Add" onAction="#onAdd" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>

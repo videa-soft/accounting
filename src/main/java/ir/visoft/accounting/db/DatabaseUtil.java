@@ -24,7 +24,7 @@ public class DatabaseUtil {
     private static Logger log = Logger.getLogger(DatabaseUtil.class.getName());
 
 
-    public static List<BaseEntity> getEntity(BaseEntity entity)
+    public static <T> List<T> getEntity(BaseEntity entity)
             throws SQLException, NoSuchMethodException, NoSuchFieldException,
             InstantiationException, IllegalAccessException, InvocationTargetException {
         String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
@@ -57,9 +57,7 @@ public class DatabaseUtil {
     }
 
 
-    public static List<BaseEntity> getAll(BaseEntity entity)
-            throws IllegalAccessException, InstantiationException, SQLException,
-            NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+    public static <T> List<T> getAll(BaseEntity entity) {
         String query = "SELECT * FROM " + entity.getClass().getSimpleName();
         return getResult(query, entity);
     }
@@ -80,21 +78,35 @@ public class DatabaseUtil {
     }
 
 
-    public static List<BaseEntity> getResult(String query, BaseEntity entity)
-            throws SQLException, InvocationTargetException, IllegalAccessException,
-            NoSuchMethodException, InstantiationException, NoSuchFieldException {
-        List<Map<String, Object>> rawResults = runQuery(query);
-        List<BaseEntity> results = new ArrayList<BaseEntity>();
-        for (Map<String, Object> rawResult : rawResults) {
-            BaseEntity result = entity.getClass().getConstructor().newInstance();
-            for (String columnName : rawResult.keySet()) {
-                String fieldName = getEntityFieldName(columnName);
-                Method setter = entity.getClass().getMethod(getSetterMethodName(fieldName),
-                        entity.getClass().getDeclaredField(fieldName).getType());
-                Object value = rawResult.get(columnName);
-                setter.invoke(result, value);
+    public static <T> List<T> getResult(String query, BaseEntity entity) {
+        List<Map<String, Object>> rawResults = null;
+        List<T> results = new ArrayList<T>();
+        try {
+            rawResults = runQuery(query);
+            for (Map<String, Object> rawResult : rawResults) {
+                T result = (T)entity.getClass().getConstructor().newInstance();
+                for (String columnName : rawResult.keySet()) {
+                    String fieldName = getEntityFieldName(columnName);
+                    Method setter = entity.getClass().getMethod(getSetterMethodName(fieldName),
+                            entity.getClass().getDeclaredField(fieldName).getType());
+                    Object value = rawResult.get(columnName);
+                    setter.invoke(result, value);
+                }
+                results.add(result);
             }
-            results.add(result);
+
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        } catch (NoSuchMethodException e) {
+            log.error(e.getMessage());
+        } catch (InstantiationException e) {
+            log.error(e.getMessage());
+        } catch (IllegalAccessException e) {
+            log.error(e.getMessage());
+        } catch (InvocationTargetException e) {
+            log.error(e.getMessage());
+        } catch (NoSuchFieldException e) {
+            log.error(e.getMessage());
         }
         return results;
     }

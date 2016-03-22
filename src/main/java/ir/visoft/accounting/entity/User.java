@@ -26,7 +26,7 @@ public class User extends BaseEntity {
     @EntityField
     private String phoneNumber;
     @EntityField
-    private Long nationalCode;
+    private String nationalCode;
     @EntityField
     private Integer familyCount;
 
@@ -103,11 +103,11 @@ public class User extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getNationalCode() {
+    public String getNationalCode() {
         return nationalCode;
     }
 
-    public void setNationalCode(Long nationalCode) {
+    public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
 
