@@ -1,5 +1,7 @@
 CREATE TABLE USER (
   user_id INT NOT NULL PRIMARY KEY,
+  username varchar(50),
+  password varchar(300),
   first_name VARCHAR(50),
   last_name VARCHAR(50),
   customer_number VARCHAR(20)NOT NULL UNIQUE,
