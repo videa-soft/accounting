@@ -3,6 +3,7 @@ package ir.visoft.accounting.ui.controller;
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.entity.User;
+import ir.visoft.accounting.exception.DatabaseOperationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,10 +11,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.apache.log4j.Logger;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author Amir
+ */
 public class LoginController extends BaseController {
 
     private static Logger log = Logger.getLogger(LoginController.class.getName());
@@ -41,8 +43,9 @@ public class LoginController extends BaseController {
             User user = new User();
             user.setUsername(username.getText());
             user.setPassword(password.getText());
+            List<BaseEntity> userList = null;
             try {
-                List<BaseEntity> userList = DatabaseUtil.getEntity(user);
+                userList = DatabaseUtil.getEntity(user);
                 if(userList != null && !userList.isEmpty() && userList.size() == 1) {
                     authenticationSuccess = true;
                 } else {
@@ -50,19 +53,12 @@ public class LoginController extends BaseController {
                     header = "Username/Password Wrong!";
                     content = "You entered wrong credentials.";
                 }
-            } catch (SQLException e) {
-                log.error(e.getMessage());
-            } catch (InvocationTargetException e) {
-                log.error(e.getMessage());
-            } catch (NoSuchMethodException e) {
-                log.error(e.getMessage());
-            } catch (InstantiationException e) {
-                log.error(e.getMessage());
-            } catch (IllegalAccessException e) {
-                log.error(e.getMessage());
-            } catch (NoSuchFieldException e) {
-                log.error(e.getMessage());
+            } catch (DatabaseOperationException e) {
+                title = "Login Error";
+                header = "Operation Exception";
+                content = "There is an error in system operation.";
             }
+
         }
 
         if(!authenticationSuccess) {

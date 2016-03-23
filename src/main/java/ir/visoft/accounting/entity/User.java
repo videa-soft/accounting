@@ -1,6 +1,7 @@
 package ir.visoft.accounting.entity;
 
 import ir.visoft.accounting.annotation.EntityField;
+import ir.visoft.accounting.annotation.PK;
 
 /**
  * @author Amir
@@ -8,6 +9,7 @@ import ir.visoft.accounting.annotation.EntityField;
 public class User extends BaseEntity {
 
     @EntityField
+    @PK
     private Integer userId;
     @EntityField
     private String username;
@@ -29,6 +31,26 @@ public class User extends BaseEntity {
     private String nationalCode;
     @EntityField
     private Integer familyCount;
+
+    public User(Integer userId, String username, String password, String firstName, String lastName, String customerNumber, String homeAddress, String workAddress, String phoneNumber, String nationalCode, Integer familyCount) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.customerNumber = customerNumber;
+        this.homeAddress = homeAddress;
+        this.workAddress = workAddress;
+        this.phoneNumber = phoneNumber;
+        this.nationalCode = nationalCode;
+        this.familyCount = familyCount;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User() {}
 
 
     public Integer getUserId() {

@@ -13,6 +13,8 @@
       <TabPane prefHeight="555.0" prefWidth="734.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Users">
+
+
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="717.0">
                      <children>
@@ -20,7 +22,9 @@
                           <tabs>
                             <Tab text="Untitled Tab 1">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="347.0" prefWidth="450.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="347.0" prefWidth="450.0">
+                                       <children>
+                                       </children></AnchorPane>
                               </content>
                             </Tab>
                             <Tab text="Untitled Tab 2">
@@ -37,11 +41,11 @@
                         </TableView>
                         <MenuButton layoutX="26.0" layoutY="23.0" mnemonicParsing="false" text="Actions">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Edit" onAction="#onEdit" />
-                            <MenuItem mnemonicParsing="false" text="Remove" onAction="#onRemove" />
+                            <MenuItem mnemonicParsing="false" onAction="#onEditUser" text="Edit" />
+                            <MenuItem mnemonicParsing="false" onAction="#onRemoveUser" text="Remove" />
                           </items>
                         </MenuButton>
-                        <Button layoutX="599.0" layoutY="23.0" mnemonicParsing="false" text="Add" onAction="#onAdd" />
+                        <Button layoutX="599.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="Add" />
                      </children>
                   </AnchorPane>
             </content>
