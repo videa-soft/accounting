@@ -36,6 +36,10 @@ public class MainController extends BaseController {
 
     @FXML
     public void initialize() {
+        setUsersTableData();
+    }
+
+    private void setUsersTableData() {
         List<User> users = null;
         try {
             users = DatabaseUtil.getAll(new User());
@@ -69,7 +73,7 @@ public class MainController extends BaseController {
 
     @Override
     public void refresh() {
-        initialize();
+        setUsersTableData();
     }
 
     @FXML

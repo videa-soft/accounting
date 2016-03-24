@@ -30,11 +30,6 @@ public class EditUserController extends BaseController {
 
 
 
-    @FXML
-    public void initialize() {
-
-    }
-
     @Override
     public void init(Object data) {
         selectedUser = (User)data;
@@ -106,7 +101,9 @@ public class EditUserController extends BaseController {
         Alert alert;
         if(validate) {
             User user = new User();
-            user.setUserId(selectedUser.getUserId());
+            if(selectedUser != null) {
+                user.setUserId(selectedUser.getUserId());
+            }
             user.setUsername(username);
             user.setFirstName(firstName);
             user.setLastName(lastName);
