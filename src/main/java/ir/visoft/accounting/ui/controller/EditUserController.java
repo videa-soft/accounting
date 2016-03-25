@@ -124,7 +124,7 @@ public class EditUserController extends BaseController {
                 if(stage != null) {
                     stage.close();
                 }
-                refreshView(MainController.class);
+                refreshView(UserManagementController.class);
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 messageTitle = "";
