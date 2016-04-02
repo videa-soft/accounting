@@ -91,7 +91,7 @@ public class EditAccountController extends BaseController {
             accEntity.setAccountBalance(accBalance);
            
             try {
-                Integer primaryKey = 1;//DatabaseUtil.getValidPrimaryKey(accEntity);
+                Integer primaryKey = DatabaseUtil.getValidPrimaryKey(accEntity);
                 if (primaryKey != null && primaryKey != 0) {
                     accEntity.setAccId(primaryKey);
                     DatabaseUtil.create(accEntity);
@@ -108,12 +108,12 @@ public class EditAccountController extends BaseController {
                 messageContent = "There is an error in system operation!";
                 alert = new Alert(Alert.AlertType.ERROR);
             }
-//            catch (DeveloperFaultException e) {
-//                messageTitle = "";
-//                messageHeader = "Operation Exception!";
-//                messageContent = "There is an error in system operation!";
-//                alert = new Alert(Alert.AlertType.ERROR);
-//            }
+            catch (DeveloperFaultException e) {
+                messageTitle = "";
+                messageHeader = "Operation Exception!";
+                messageContent = "There is an error in system operation!";
+                alert = new Alert(Alert.AlertType.ERROR);
+            }
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
         }

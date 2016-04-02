@@ -16,8 +16,8 @@
         <MenuItem mnemonicParsing="false" onAction="#onRemoveUser" text="Remove" />
       </items>
     </MenuButton>
-    <Button layoutX="342.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditBill" text="EditBill" />
-    <Button layoutX="435.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="Add" />
-    <Button layoutX="236.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditAccunt" text="EditAccount" />
+    <Button layoutX="433.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditBill" text="EditBill" />
+    <Button layoutX="518.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="Add" />
+    <Button layoutX="313.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditAccunt" text="EditAccount" />
   </children>
 </AnchorPane>

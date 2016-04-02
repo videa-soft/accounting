@@ -38,14 +38,14 @@ public class BillManagementController extends BaseController {
             TableColumn billIdColumn = new TableColumn("billId");
             billIdColumn.setCellValueFactory(new PropertyValueFactory("billId"));
             
-            TableColumn preDateColumn = new TableColumn("preDate");
-            preDateColumn.setCellValueFactory(new PropertyValueFactory("preDate"));
+            TableColumn preDateColumn = new TableColumn("previousDate");
+            preDateColumn.setCellValueFactory(new PropertyValueFactory("previousDate"));
 
-            TableColumn currentDateColumn = new TableColumn("currentDate");
-            currentDateColumn.setCellValueFactory(new PropertyValueFactory("currentDate"));
+            TableColumn currentDateColumn = new TableColumn("newDate");
+            currentDateColumn.setCellValueFactory(new PropertyValueFactory("newDate"));
 
-            TableColumn preFigureColumn = new TableColumn("preFigure");
-            preFigureColumn.setCellValueFactory(new PropertyValueFactory("preFigure"));
+            TableColumn preFigureColumn = new TableColumn("previousFigure");
+            preFigureColumn.setCellValueFactory(new PropertyValueFactory("previousFigure"));
 
             TableColumn currentFigureColumn = new TableColumn("currentFigure");
             currentFigureColumn.setCellValueFactory(new PropertyValueFactory("currentFigure"));
@@ -56,9 +56,12 @@ public class BillManagementController extends BaseController {
             TableColumn abonmanColumn = new TableColumn("abonman");
             abonmanColumn.setCellValueFactory(new PropertyValueFactory("abonman"));
 
+            TableColumn finalAmountColumn = new TableColumn("finalAmount");
+            finalAmountColumn.setCellValueFactory(new PropertyValueFactory("finalAmount"));
+
             billTable.getItems().removeAll();
             billTable.getColumns().clear();
-            billTable.getColumns().addAll(billIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn);
+            billTable.getColumns().addAll(billIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn, finalAmountColumn);
             billTable.setItems(FXCollections.observableList(Bill));
         } catch (DatabaseOperationException e) {
             showOperationError();

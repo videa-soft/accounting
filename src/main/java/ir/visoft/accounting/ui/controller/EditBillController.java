@@ -181,20 +181,20 @@ public class EditBillController extends BaseController {
             if(selectedUser != null) {
                 bill.setUserId(selectedUser.getUserId());
             }
-//            bill.setCreateDate(currentDate);
-//            bill.setPreviousDate(preDate);
+//            bill.setNewDate(currentDate);
+            bill.setPreviousDate(preDate);
             bill.setPreviousFigure(preFigure);
             bill.setCurrentFigure(currentFigure);
             bill.setCunsumption(cunsumptionInt);
-            bill.setAbonman(abonmanD.floatValue());
+            bill.setAbonman(abonmanD);
             bill.setReduction(reductionInt);
             bill.setServices(servicesInt);
             bill.setCostWater(costWater);
-//            bill.setCostBalance(cost_balance);
+            bill.setCostBalance(bill.getReduction());
             bill.setFinalAmount(finalamount);
            
             try {
-                Integer primaryKey = 2;//DatabaseUtil.getValidPrimaryKey(bill);
+                Integer primaryKey = DatabaseUtil.getValidPrimaryKey(bill);
                 if (primaryKey != null && primaryKey != 0) {
                     bill.setBillId(primaryKey);
                     billId.setText(primaryKey.toString());
@@ -212,12 +212,12 @@ public class EditBillController extends BaseController {
                 messageContent = "There is an error in system operation!";
                 alert = new Alert(Alert.AlertType.ERROR);
             } 
-//            catch (DeveloperFaultException e) {
-//                messageTitle = "";
-//                messageHeader = "Operation Exception!";
-//                messageContent = "There is an error in system operation!";
-//                alert = new Alert(Alert.AlertType.ERROR);
-//            }
+            catch (DeveloperFaultException e) {
+                messageTitle = "";
+                messageHeader = "Operation Exception!";
+                messageContent = "There is an error in system operation!";
+                alert = new Alert(Alert.AlertType.ERROR);
+            }
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
         }
@@ -228,14 +228,10 @@ public class EditBillController extends BaseController {
     }
     
     
-//    public static void main (String[] args){
-//        
-//        Date preDate = new Date(System.currentTimeMillis());
-//        Date currentDate = new Date(System.currentTimeMillis());
-//        Double b = (double)preDate.getTime() - currentDate.getTime();
-//
-//        System.out.println("preDate is:::::"+preDate);
-//        System.out.println("b:::::"+b);
-//    }
+    public static void main (String[] args) throws DatabaseOperationException{
+        
+        Bill bill = new Bill();
+        List results = DatabaseUtil.getLastUpdated(bill);
+    }
     
 }

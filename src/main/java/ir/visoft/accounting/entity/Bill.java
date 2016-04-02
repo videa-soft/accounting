@@ -2,6 +2,8 @@ package ir.visoft.accounting.entity;
 
 import ir.visoft.accounting.annotation.EntityField;
 import ir.visoft.accounting.annotation.PK;
+import ir.visoft.accounting.annotation.SortDate;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -11,11 +13,13 @@ public class Bill extends BaseEntity {
     
     @EntityField
     @PK
+    @SortDate
     private Integer billId;
     @EntityField
-    private Date previousDate;
+    private LocalDate previousDate;
     @EntityField
-    private Date createDate;
+//    @SortDate
+    private Date newDate;
     @EntityField
     private Integer previousFigure;
     @EntityField
@@ -23,7 +27,7 @@ public class Bill extends BaseEntity {
     @EntityField
     private Integer cunsumption;
     @EntityField
-    private Float abonman;
+    private Double abonman;
     @EntityField
     private Integer reduction;
     @EntityField
@@ -37,10 +41,10 @@ public class Bill extends BaseEntity {
     @EntityField
     private Integer userId;
 
-    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Float abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId) {
+    public Bill(Integer billId, LocalDate preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Double abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId) {
         this.billId = billId;
         this.previousDate = preDate;
-        this.createDate = currentDate;
+        this.newDate = currentDate;
         this.previousFigure = preFigure;
         this.currentFigure = currentFigure;
         this.cunsumption = cunsumption;
@@ -67,20 +71,29 @@ public class Bill extends BaseEntity {
         this.billId = billId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+//    }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getPreviousDate() {
+//    public Date getPreviousDate() {
+//        return previousDate;
+//    }
+//
+//    public void setPreviousDate(Date previousDate) {
+//        this.previousDate = previousDate;
+    public LocalDate getPreviousDate() {
         return previousDate;
     }
 
-    public void setPreviousDate(Date previousDate) {
+    public void setPreviousDate(LocalDate previousDate) {
         this.previousDate = previousDate;
+    }
+    
+
+    public Date getNewDate() {
+        return newDate;
+    }
+
+    public void setNewDate(Date newDate) {
+        this.newDate = newDate;
     }
 
     public Integer getPreviousFigure() {
@@ -107,11 +120,11 @@ public class Bill extends BaseEntity {
         this.cunsumption = cunsumption;
     }
 
-    public Float getAbonman() {
+    public Double getAbonman() {
         return abonman;
     }
 
-    public void setAbonman(Float abonman) {
+    public void setAbonman(Double abonman) {
         this.abonman = abonman;
     }
 

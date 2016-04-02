@@ -23,7 +23,7 @@ public class MainController extends BaseController {
     @FXML
     private void initialize() {
         ApplicationContext.addController(userManagementTabController);
-        //ApplicationContext.addController(billManagementTabController);
+        ApplicationContext.addController(billManagementTabController);
     }
 
 }

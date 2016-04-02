@@ -2,6 +2,7 @@ package ir.visoft.accounting.db;
 
 import ir.visoft.accounting.annotation.EntityField;
 import ir.visoft.accounting.annotation.PK;
+import ir.visoft.accounting.annotation.SortDate;
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
@@ -26,6 +27,40 @@ public class DatabaseUtil {
 
     private static Logger log = Logger.getLogger(DatabaseUtil.class.getName());
 
+    
+    
+    public static <T>List<T> getLastUpdated(BaseEntity entity) throws DatabaseOperationException {
+        
+        
+        String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
+        Set<Field> sortDateFields = findFields(entity.getClass(), SortDate.class);
+        for (Field sortDateField : sortDateFields) {
+
+            Method getter = null;
+            try {
+                getter = entity.getClass().getMethod(getGetterMethodName(sortDateField.getName()));
+                Object value = getter.invoke(entity);
+//                if (value != null && !value.toString().equals("")) {
+                    query += getDBFieldName(sortDateField.getName()) + "=(select max(" + getDBFieldName(sortDateField.getName()) + ") from " + entity.getClass().getSimpleName() + ")";// getter.invoke(entity) + "' AND ";
+                    return getResult(query, entity);
+//                }
+            } catch (NoSuchMethodException e) {
+                log.error("Problem in database querying...");
+                log.error(e.getMessage());
+                throw new DatabaseOperationException();
+            } catch (InvocationTargetException e) {
+                log.error("Problem in database querying...");
+                log.error(e.getMessage());
+                throw new DatabaseOperationException();
+            } catch (IllegalAccessException e) {
+                log.error("Problem in database querying...");
+                log.error(e.getMessage());
+                throw new DatabaseOperationException();
+            }
+        }
+        return null;
+    }
+    
 
     public static <T> List<T> getEntity(BaseEntity entity) throws DatabaseOperationException {
         String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";

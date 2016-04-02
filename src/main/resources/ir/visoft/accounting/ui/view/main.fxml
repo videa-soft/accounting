@@ -18,7 +18,7 @@
         </Tab>
         <Tab text="Bill">
           <content>
-<!--            <fx:include fx:id="billManagementTab" source="billManagement.fxml" />-->
+            <fx:include fx:id="billManagementTab" source="billManagement.fxml" />
           </content>
         </Tab>
       </tabs>

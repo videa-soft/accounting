@@ -33,7 +33,7 @@ CREATE TABLE BILL (
   previous_figure INT,
   current_figure INT,
   cunsumption INT,
-  abonman FLOAT ,
+  abonman DOUBLE ,
   reduction INT,
   services INT,
   cost_water DOUBLE,
