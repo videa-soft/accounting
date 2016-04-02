@@ -4,6 +4,8 @@ import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
+import ir.visoft.accounting.ui.UTF8Control;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,6 +14,11 @@ import javafx.scene.control.TextField;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 /**
  * @author Amir
@@ -19,7 +26,8 @@ import java.util.List;
 public class LoginController extends BaseController {
 
     private static Logger log = Logger.getLogger(LoginController.class.getName());
-
+    
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
 
     @FXML
     private TextField username;
@@ -28,7 +36,7 @@ public class LoginController extends BaseController {
     private PasswordField password;
 
     @FXML
-    private void login(ActionEvent event) {
+    private void login(ActionEvent event) throws IOException {
 
         String title = null;
         String header = null;
@@ -36,9 +44,9 @@ public class LoginController extends BaseController {
         boolean authenticationSuccess = false;
 
         if((username == null || username.getText().equals("")) || (password == null || password.getText().equals(""))) {
-            title = "Username/Password Error";
-            header = "Username/Password Empty!";
-            content = "Please Enter both username and password.";
+            title = resourceBundle.getString("Username_or_Password_Error").toString();
+            header = "";//Username/Password Empty!";
+            content = resourceBundle.getString("plz_insert_user_and_pass").toString();
         } else {
             User user = new User();
             user.setUsername(username.getText());
@@ -49,14 +57,14 @@ public class LoginController extends BaseController {
                 if(userList != null && !userList.isEmpty() && userList.size() == 1) {
                     authenticationSuccess = true;
                 } else {
-                    title = "Login Error";
-                    header = "Username/Password Wrong!";
-                    content = "You entered wrong credentials.";
+                    title = resourceBundle.getString("login_error").toString();
+                    header = "";// "Username/Password Wrong!";
+                    content = resourceBundle.getString("credentials_wrong").toString();
                 }
             } catch (DatabaseOperationException e) {
-                title = "Login Error";
-                header = "Operation Exception";
-                content = "There is an error in system operation.";
+                title = resourceBundle.getString("login_error").toString();
+                header = resourceBundle.getString("operation_system_exception").toString();
+                content = resourceBundle.getString("error_in_sys_operation").toString();
             }
 
         }
@@ -68,7 +76,8 @@ public class LoginController extends BaseController {
             alert.setContentText(content);
             alert.showAndWait();
         } else {
-            changeScene("../view/main.fxml", getStage(event));
+//            changeScene("../view/main.fxml", getStage(event));
+            changeSceneWithBundle("../view/main.fxml", getStage(event));
         }
     }
 

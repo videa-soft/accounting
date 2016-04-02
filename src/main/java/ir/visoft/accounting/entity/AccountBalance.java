@@ -36,6 +36,10 @@ public class AccountBalance extends BaseEntity {
     }
     
     public AccountBalance(){}
+    
+    public AccountBalance(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getAccId() {
         return accId;

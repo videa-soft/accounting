@@ -16,7 +16,7 @@ public class Bill extends BaseEntity {
     @SortDate
     private Integer billId;
     @EntityField
-    private LocalDate previousDate;
+    private Date previousDate;
     @EntityField
 //    @SortDate
     private Date newDate;
@@ -41,7 +41,9 @@ public class Bill extends BaseEntity {
     @EntityField
     private Integer userId;
 
-    public Bill(Integer billId, LocalDate preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Double abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId) {
+
+    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Double abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId) {
+
         this.billId = billId;
         this.previousDate = preDate;
         this.newDate = currentDate;
@@ -71,22 +73,13 @@ public class Bill extends BaseEntity {
         this.billId = billId;
     }
 
-//    }
-
-//    public Date getPreviousDate() {
-//        return previousDate;
-//    }
-//
-//    public void setPreviousDate(Date previousDate) {
-//        this.previousDate = previousDate;
-    public LocalDate getPreviousDate() {
+    public Date getPreviousDate() {
         return previousDate;
     }
 
-    public void setPreviousDate(LocalDate previousDate) {
+    public void setPreviousDate(Date previousDate) {
         this.previousDate = previousDate;
     }
-    
 
     public Date getNewDate() {
         return newDate;

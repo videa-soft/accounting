@@ -12,10 +12,12 @@ import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
+import ir.visoft.accounting.ui.UTF8Control;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -32,10 +34,12 @@ import javafx.scene.control.TextField;
  */
 public class EditAccountController extends BaseController {
     private static final Logger LOG = Logger.getLogger(EditAccountController.class.getName());
+    
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
 
     private User selectedUser;
     @FXML
-    private DatePicker createDate;
+    private TextField createDate;
     @FXML
     private TextField debit;
     @FXML
@@ -44,49 +48,90 @@ public class EditAccountController extends BaseController {
     private TextField accountBalance;
     @FXML
     private TextField description;
+    @FXML
+    private TextField customerNumber;
     
       @Override
     public void init(Object data) {
         selectedUser = (User)data;
-//        List<AccountBalance> accList = null;
-//        try {
+        List<AccountBalance> accList = null;
+        try {
             if (selectedUser != null) {
-//                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
-//                customerNumber.setText(selectedUser.getCustomerNumber().toString());
+                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
+                customerNumber.setText(selectedUser.getCustomerNumber().toString());
             }
-//        } catch (DatabaseOperationException e) {
+        } catch (DatabaseOperationException e) {
 ////            messageTitle = "";
 ////            messageHeader = "Operation Exception!";
 ////            messageContent = "There is an error in system operation!";
-//            e.printStackTrace();
+            e.printStackTrace();
         }
+    }
     
     @FXML
     private void saveAccount(){
         
-        LocalDate createDate = this.createDate.getValue();
-        Integer debitInt = Integer.parseInt(this.debit.getText());
-        Integer credit = Integer.parseInt(this.credit.getText());
+        Date createDate = convertStringToDate(this.createDate.getText().toString());
+        java.sql.Date sqlDate = null ;
+        if(createDate == null){
+            this.createDate.setText("");
+            return;
+        }
+        else
+            sqlDate = new java.sql.Date( createDate.getTime() );
+        
+        Integer debitInt = 0;
+        Integer credit = 0;
+        Integer accBalance = 0;
         String desc = this.description.getText();
+        if(!this.debit.getText().equals(""))
+            debitInt = Integer.parseInt(this.debit.getText());
+        if(!this.credit.getText().equals(""))
+            credit = Integer.parseInt(this.credit.getText());  
         
-        Integer accBalance = credit - debitInt ; // @TODO: az accBalance ghabli ham kam shavad
-        
-        accountBalance.setText(accBalance.toString());
-        
+        Alert alert ;
         String messageTitle = "";
         String messageHeader = "Operation successful";
         String messageContent = "";
         boolean validate = true;
         
-        Alert alert;
+           if (createDate == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(messageTitle);
+            alert.setHeaderText(null);
+            alert.setContentText(resourceBundle.getString("createDate_is_null"));
+            alert.showAndWait();
+            return;
+        }
+           if (debitInt == 0 && credit == 0) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(messageTitle);
+            alert.setHeaderText(null);
+            alert.setContentText(resourceBundle.getString("debit_and_credit_must_not_be_null"));
+            alert.showAndWait();
+            return;
+        }
+           else{
+               accBalance = debitInt - credit; // @TODO: az accBalance ghabli ham kam shavad
+//               if(accBalance < 0){
+//                   alert = new Alert(Alert.AlertType.ERROR);
+//                   alert.setTitle("accountBalance");
+//                   alert.setHeaderText("amount of credit is more than debit!");
+//                   alert.setContentText("please pay less than amount of this credit and try again.");
+//                   alert.showAndWait();
+//               }
+               accountBalance.setText(accBalance.toString());
+           }
+               
+        
         if(validate) {
             AccountBalance accEntity = new AccountBalance();
             if(selectedUser != null) {
                 accEntity.setUserId(selectedUser.getUserId());
             }
-//            accEntity.setCreateDate(createDate);
+            accEntity.setCreateDate(sqlDate);
             accEntity.setCredit(credit);
-            accEntity.setDebit(credit);
+            accEntity.setDebit(debitInt);
             accEntity.setDescription(desc);
             accEntity.setAccountBalance(accBalance);
            
@@ -103,22 +148,22 @@ public class EditAccountController extends BaseController {
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 e.printStackTrace();
-                messageTitle = "";
-                messageHeader = "Operation Exception!";
-                messageContent = "There is an error in system operation!";
                 alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("");
+                alert.setHeaderText(resourceBundle.getString("operation_system_exception"));
+                alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
             }
             catch (DeveloperFaultException e) {
-                messageTitle = "";
-                messageHeader = "Operation Exception!";
-                messageContent = "There is an error in system operation!";
                 alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("");
+                alert.setHeaderText(resourceBundle.getString("operation_system_exception"));
+                alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
             }
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
         }
         alert.setTitle(messageTitle);
-        alert.setHeaderText(messageHeader);
+        alert.setHeaderText(resourceBundle.getString("Operation_successful"));
         alert.setContentText(messageContent);
         alert.showAndWait();
     }

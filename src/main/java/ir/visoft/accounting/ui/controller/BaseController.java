@@ -2,6 +2,7 @@ package ir.visoft.accounting.ui.controller;
 
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.ui.ApplicationContext;
+import ir.visoft.accounting.ui.UTF8Control;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,13 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 
 /**
  * @author Amir
@@ -21,10 +29,77 @@ import java.lang.reflect.Method;
 public abstract class BaseController {
 
     private static Logger log = Logger.getLogger(BaseEntity.class.getName());
+    
+    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
 
     protected Stage stage;
+    
+    private static final int currentYear = 1395 ;
+    
 
-
+    public static Date convertStringToDate(String dateString) {
+        
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        String title ;
+//        String header ;
+//        String content ;
+        if (dateString.equals("")) {
+            alert.setTitle(resourceBundle.getString("error"));
+            alert.setHeaderText("");
+            alert.setContentText(resourceBundle.getString("createDate_is_null"));
+            alert.showAndWait();
+            return null;
+        }
+        Date date = null;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            date = df.parse(dateString);
+            if (dateString.indexOf("-") != 4 || dateString.lastIndexOf("-") != 7) {
+                alert.setTitle(resourceBundle.getString("error"));
+                alert.setHeaderText("");
+                alert.setContentText(resourceBundle.getString("format_is_not_correct_example"));
+                alert.showAndWait();
+                return null;
+            }
+            Integer year = Integer.parseInt(dateString.subSequence(0, 4).toString());
+            Integer mount = Integer.parseInt(dateString.substring(5, 7).toString());
+            Integer day = Integer.parseInt(dateString.substring(8, dateString.length()).toString());
+            if (year > currentYear || year < 1300) {
+                alert.setTitle(resourceBundle.getString("error"));
+                alert.setHeaderText("");
+                alert.setContentText(resourceBundle.getString("year_is_more_than_current"));
+                alert.showAndWait();
+                return null;
+            } else if (mount > 12) {
+                alert.setTitle(resourceBundle.getString("error"));
+                alert.setHeaderText("");
+                alert.setContentText(resourceBundle.getString("mount_is_not_correct"));
+                alert.showAndWait();
+                return null;
+            } else if (day > 31) {
+                alert.setTitle(resourceBundle.getString("error"));
+                alert.setHeaderText("");
+                alert.setContentText(resourceBundle.getString("day_is_not_correct"));
+                alert.showAndWait();
+                return null;
+            }
+        } catch (Exception e) {
+            alert.setTitle(resourceBundle.getString("error"));
+            alert.setHeaderText("");
+            alert.setContentText(resourceBundle.getString("format_is_not_correct"));
+            alert.showAndWait();
+        }
+        return date;
+    }
+    
+    public static Integer checkMount(Integer mount){
+        if(mount.equals(01) || mount.equals(02) || mount.equals(03) || mount.equals(04) || mount.equals(05) || mount.equals(06))
+            return 31 ;
+        else
+            return 30;
+    }
+    
+    
     protected Stage getStage(ActionEvent event) {
         return (Stage)((Button)event.getSource()).getScene().getWindow();
     }
@@ -48,6 +123,26 @@ public abstract class BaseController {
             log.error("Root element is null on setting: " + viewName);
         }
     }
+    
+     protected void changeSceneWithBundle(String viewName, Stage stage) {
+         
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName), resourceBundle);
+        Parent root = null;
+        try {
+            root = loader.load();
+            BaseController controller = loader.<BaseController>getController();
+            ApplicationContext.addController(controller);
+            controller.setStage(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (root != null) {
+            stage.setScene(new Scene(root, 1200, 700));
+            stage.show();
+        } else {
+            log.error("Root element is null on setting: " + viewName);
+        }
+    }
 
     public void init(Object data) {
         throw new UnsupportedOperationException();
@@ -55,9 +150,9 @@ public abstract class BaseController {
 
     protected void showOperationError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        String title = "Login Error";
-        String header = "Operation Exception";
-        String content = "There is an error in system operation.";
+        String title = resourceBundle.getString("login_error").toString().toString();
+        String header = resourceBundle.getString("operation_system_exception").toString();
+        String content = resourceBundle.getString("error_in_sys_operation").toString();
 
         alert.setTitle(title);
         alert.setHeaderText(header);

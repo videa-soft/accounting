@@ -4,6 +4,7 @@ import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
+import ir.visoft.accounting.ui.UTF8Control;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
@@ -11,10 +12,14 @@ import javafx.scene.control.TextField;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class EditUserController extends BaseController {
 
     private static Logger log = Logger.getLogger(EditUserController.class.getName());
+    
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
 
     private User selectedUser;
     @FXML
@@ -29,6 +34,10 @@ public class EditUserController extends BaseController {
     private TextArea homeAddress;
     @FXML
     private TextField familyCnt;
+    @FXML
+    private TextArea workAddress;
+    @FXML
+    private TextField phoneNumber;
 
 
 
@@ -42,6 +51,8 @@ public class EditUserController extends BaseController {
             nationalCode.setText(selectedUser.getNationalCode());
             homeAddress.setText(selectedUser.getHomeAddress());
             familyCnt.setText(selectedUser.getFamilyCount().toString());
+            workAddress.setText(selectedUser.getWorkAddress());
+            phoneNumber.setText(selectedUser.getPhoneNumber());
         }
     }
 
@@ -52,37 +63,41 @@ public class EditUserController extends BaseController {
         String lastName = this.lastName.getText();
         String nationalCode = this.nationalCode.getText();
         String homeAddress = this.homeAddress.getText();
-        Integer familyCnt = Integer.parseInt(this.familyCnt.getText());
+        String workAddress = this.workAddress.getText();
+        String phoneNumber = this.phoneNumber.getText();
+        Integer familyCnt = null;
+        if(!this.familyCnt.getText().equals(""))
+            familyCnt = Integer.parseInt(this.familyCnt.getText());
 
         String messageTitle = "";
-        String messageHeader = "Operation successful";
+        String messageHeader = resourceBundle.getString("Operation_successful").toString();
         String messageContent = "";
 
         boolean validate = true;
         if(username == null || username.equals("")) {
             messageTitle = "";
-            messageHeader = "Empty username is not allowed!";
+            messageHeader = resourceBundle.getString("usename_is_null").toString();
             messageContent = "";
             validate = false;
 
         } else if(firstName == null || firstName.equals("")) {
             messageTitle = "";
-            messageHeader = "Empty first name is not allowed!";
+            messageHeader = resourceBundle.getString("firstname_is_null").toString();
             messageContent = "";
             validate = false;
         } else if(lastName == null || lastName.equals("")) {
             messageTitle = "";
-            messageHeader = "Empty last name is not allowed!";
+            messageHeader = resourceBundle.getString("lastname_is_null").toString();
             messageContent = "";
             validate = false;
         } else if(nationalCode == null || nationalCode.equals("")) {
             messageTitle = "";
-            messageHeader = "Empty national code is not allowed!";
+            messageHeader = resourceBundle.getString("nationalCode_is_null").toString();
             messageContent = "";
             validate = false;
         } else if(familyCnt == null || familyCnt.equals(null)) {
             messageTitle = "";
-            messageHeader = "Empty family Count is not allowed!";
+            messageHeader = resourceBundle.getString("familyCount_is_null").toString();
             messageContent = "";
             validate = false;
         }else {
@@ -92,14 +107,14 @@ public class EditUserController extends BaseController {
                 userList = DatabaseUtil.getEntity(new User(username));
             } catch (DatabaseOperationException e) {
                 messageTitle = "";
-                messageHeader = "Operation Exception!";
-                messageContent = "There is an error in system operation!";
+                messageHeader = resourceBundle.getString("operation_system_exception").toString();
+                messageContent = resourceBundle.getString("error_in_sys_operation").toString();
                 validate = false;
             }
             if(userList != null && !userList.isEmpty() && userList.size() == 1) {
                 if (!userList.get(0).getUserId().equals(selectedUser.getUserId())) {
                     messageTitle = "";
-                    messageHeader = "Username already exists!";
+                    messageHeader = resourceBundle.getString("Username_already_exists").toString();
                     messageContent = "";
                     validate = false;
                 }
@@ -119,6 +134,8 @@ public class EditUserController extends BaseController {
             user.setNationalCode(nationalCode);
             user.setHomeAddress(homeAddress);
             user.setFamilyCount(familyCnt); // @TODO :its done with ghazaleh
+            user.setWorkAddress(workAddress);
+            user.setPhoneNumber(phoneNumber);
             try {
                 if(selectedUser == null) {
                     Integer primaryKey = DatabaseUtil.getValidPrimaryKey(user);
@@ -137,13 +154,13 @@ public class EditUserController extends BaseController {
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 messageTitle = "";
-                messageHeader = "Operation Exception!";
-                messageContent = "There is an error in system operation!";
+                messageHeader = resourceBundle.getString("operation_system_exception").toString();
+                messageContent = resourceBundle.getString("error_in_sys_operation").toString();
                 alert = new Alert(Alert.AlertType.ERROR);
             } catch (DeveloperFaultException e) {
                 messageTitle = "";
-                messageHeader = "Operation Exception!";
-                messageContent = "There is an error in system operation!";
+                messageHeader = resourceBundle.getString("operation_system_exception").toString();
+                messageContent = resourceBundle.getString("error_in_sys_operation").toString();
                 alert = new Alert(Alert.AlertType.ERROR);
             }
         } else {

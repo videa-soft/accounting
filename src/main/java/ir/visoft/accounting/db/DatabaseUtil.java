@@ -6,6 +6,7 @@ import ir.visoft.accounting.annotation.SortDate;
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
+import ir.visoft.accounting.ui.UTF8Control;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.log4j.Logger;
@@ -27,36 +28,26 @@ public class DatabaseUtil {
 
     private static Logger log = Logger.getLogger(DatabaseUtil.class.getName());
 
+    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
     
-    
-    public static <T>List<T> getLastUpdated(BaseEntity entity) throws DatabaseOperationException {
-        
+    public static <T>List<T> getLastUpdated(BaseEntity entity) throws DatabaseOperationException,DeveloperFaultException {
         
         String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
         Set<Field> sortDateFields = findFields(entity.getClass(), SortDate.class);
-        for (Field sortDateField : sortDateFields) {
 
-            Method getter = null;
-            try {
-                getter = entity.getClass().getMethod(getGetterMethodName(sortDateField.getName()));
-                Object value = getter.invoke(entity);
-//                if (value != null && !value.toString().equals("")) {
+        if(sortDateFields != null){
+            for (Field sortDateField : sortDateFields) {
+                try {
                     query += getDBFieldName(sortDateField.getName()) + "=(select max(" + getDBFieldName(sortDateField.getName()) + ") from " + entity.getClass().getSimpleName() + ")";// getter.invoke(entity) + "' AND ";
                     return getResult(query, entity);
-//                }
-            } catch (NoSuchMethodException e) {
-                log.error("Problem in database querying...");
-                log.error(e.getMessage());
-                throw new DatabaseOperationException();
-            } catch (InvocationTargetException e) {
-                log.error("Problem in database querying...");
-                log.error(e.getMessage());
-                throw new DatabaseOperationException();
-            } catch (IllegalAccessException e) {
-                log.error("Problem in database querying...");
-                log.error(e.getMessage());
-                throw new DatabaseOperationException();
+                } catch (Exception e) {
+                    log.error(resourceBundle.getString("Problem in database querying").toString());
+                    log.error(e.getMessage());
+                    throw new DatabaseOperationException();
+                }
             }
+        } else{
+            throw new DeveloperFaultException();
         }
         return null;
     }
@@ -76,15 +67,15 @@ public class DatabaseUtil {
                     query += getDBFieldName(entityField.getName()) + "='" + getter.invoke(entity) + "' AND ";
                 }
             } catch (NoSuchMethodException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (InvocationTargetException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (IllegalAccessException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             }
@@ -182,15 +173,15 @@ public class DatabaseUtil {
             }
 
         } catch (NoSuchMethodException e) {
-            log.error("Problem in database querying...");
+            log.error(resourceBundle.getString("Problem in database querying").toString());
             log.error(e.getMessage());
             throw new DatabaseOperationException();
         } catch (InvocationTargetException e) {
-            log.error("Problem in database querying...");
+            log.error(resourceBundle.getString("Problem in database querying").toString());
             log.error(e.getMessage());
             throw new DatabaseOperationException();
         } catch (IllegalAccessException e) {
-            log.error("Problem in database querying...");
+            log.error(resourceBundle.getString("Problem in database querying").toString());
             log.error(e.getMessage());
             throw new DatabaseOperationException();
         }
@@ -218,15 +209,15 @@ public class DatabaseUtil {
                     query += getDBFieldName(entityField.getName()) + "='" + getter.invoke(entity) + "' AND ";
                 }
             } catch (NoSuchMethodException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (InvocationTargetException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (IllegalAccessException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             }
@@ -267,15 +258,15 @@ public class DatabaseUtil {
                 }
                 query +=  "'" + value + "', ";
             } catch (NoSuchMethodException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (InvocationTargetException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             } catch (IllegalAccessException e) {
-                log.error("Problem in database querying...");
+                log.error(resourceBundle.getString("Problem in database querying").toString());
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             }
@@ -355,14 +346,12 @@ public class DatabaseUtil {
                             while (rs.next()) {
                                 nextPrimaryKey = (Integer)rs.getObject(1);
                             }
-                            System.out.println("nextPrimaryKey______________"+nextPrimaryKey);
                             return nextPrimaryKey + 1;
                         }
                     };
 
                     try {
                         primaryKey = run.query(connection, query, h);
-                        System.out.println("primaryKey______________"+primaryKey);
                     } catch (SQLException e) {
                         log.error(e.getMessage());
                         throw new DatabaseOperationException();
