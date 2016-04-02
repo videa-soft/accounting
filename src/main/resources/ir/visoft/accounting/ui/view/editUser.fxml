@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.sun.javafx.scene.control.skin.InputField?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.EditUserController">
+  <children>
+    <GridPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="491.0">
+      <children>
+        <TextField fx:id="username" GridPane.columnIndex="1" />
+        <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="nationalCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextArea fx:id="homeAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button mnemonicParsing="false" onAction="#save" text="Save" GridPane.rowIndex="6" />
+        <Label text="Username" />
+        <Label text="First name" GridPane.rowIndex="1" />
+        <Label text="Last name" GridPane.rowIndex="2" />
+        <Label text="national code" GridPane.rowIndex="3" />
+        <Label text="Home address" GridPane.rowIndex="4" />
+        <Label text="FamilyCount" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="familyCnt" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="196.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</Pane>

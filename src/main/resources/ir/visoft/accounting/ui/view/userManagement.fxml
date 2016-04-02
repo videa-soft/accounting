@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="717.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.UserManagementController">
+  <children>
+    <TableView fx:id="usersTable" layoutX="26.0" layoutY="63.0" prefHeight="410.0" prefWidth="999.0" />
+    <MenuButton layoutX="589.0" layoutY="23.0" mnemonicParsing="false" text="Actions">
+      <items>
+        <MenuItem mnemonicParsing="false" onAction="#onEditUser" text="Edit" />
+        <MenuItem mnemonicParsing="false" onAction="#onRemoveUser" text="Remove" />
+      </items>
+    </MenuButton>
+    <Button layoutX="342.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditBill" text="EditBill" />
+    <Button layoutX="435.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="Add" />
+    <Button layoutX="236.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditAccunt" text="EditAccount" />
+  </children>
+</AnchorPane>

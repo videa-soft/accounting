@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.net.URL?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="600.000199999995" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.EditBillController">
+  <children>
+    <GridPane layoutX="10.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="537.0">
+      <children>
+        <DatePicker fx:id="preDate" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <DatePicker fx:id="currentDate" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="preFigure" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="currentFigure" minHeight="3.0" prefHeight="20.0" prefWidth="318.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="customerNumber" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="familyCount" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="familyCnt" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label text="cunsumption" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="cunsumption" alignment="TOP_LEFT" disable="true" focusTraversable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="final_amount" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+        <TextField fx:id="final_amount" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+        <Label text="reduction" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+        <TextField fx:id="reduction" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+        <Label text="abonman" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <Label text="services" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <Label text="cost_water" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+        <Label text="cost_balance" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+        <TextField fx:id="cost_balance" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+        <TextField fx:id="cost_water" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+        <TextField fx:id="services" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+        <TextField fx:id="abonman" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label text="billId(for test)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="billId" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="preFigure" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="currentDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="preDate" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <font>
+           <Font size="12.0" /> 
+          </font>
+        </Label>
+        <Label text="customerNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="currentFigure" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="196.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Button layoutX="281.0" layoutY="440.0" mnemonicParsing="false" onAction="#computationBtn" text="computation" />
+    <Button disable="true" layoutX="420.0" layoutY="441.0" mnemonicParsing="false" text="show Bill Paper" />
+    <Button layoutX="189.0" layoutY="441.0" mnemonicParsing="false" text="cancle" />
+  </children>
+</Pane>

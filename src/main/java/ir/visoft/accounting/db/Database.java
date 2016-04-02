@@ -1,14 +1,12 @@
 package ir.visoft.accounting.db;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.log4j.Logger;
 import ir.visoft.accounting.util.PropUtil;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * @author Amir
@@ -41,48 +39,6 @@ public class Database {
             }
         }
         return connection;
-    }
-
-
-    public static void test() throws SQLException {
-        QueryRunner run = new QueryRunner();
-
-        ResultSetHandler<Object[]> h = new ResultSetHandler<Object[]>() {
-            public Object[] handle(ResultSet rs) throws SQLException {
-
-                List<Object> rows = new ArrayList<Object>();
-                while (rs.next()) {
-                    ResultSetMetaData meta = rs.getMetaData();
-                    int columnCount = meta.getColumnCount();
-
-                    Object[] result = new Object[columnCount];
-
-                    for (int i = 0; i < columnCount; i++) {
-                        result[i] = rs.getObject(i + 1);
-                    }
-
-                    rows.add(result);
-                }
-
-                return rows.toArray();
-            }
-        };
-
-
-
-        getConnection();
-        if(connection != null) {
-            try {
-                Object[] result = run.query(connection, "SELECT * FROM temptable", h);
-                // do something with the result
-
-            } finally {
-                // Use this helper method so we don't have to check for null
-                DbUtils.close(connection);
-                connection = null;
-            }
-        }
-
     }
 
 }

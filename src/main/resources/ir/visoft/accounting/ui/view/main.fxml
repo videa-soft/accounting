@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="737.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.MainController">
+  <children>
+    <TabPane prefHeight="584.0" prefWidth="865.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Users">
+          <content>
+            <fx:include fx:id="userManagementTab" source="userManagement.fxml" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="584.0" prefWidth="734.0" />
+          </content>
+        </Tab>
+        <Tab text="Bill">
+          <content>
+<!--            <fx:include fx:id="billManagementTab" source="billManagement.fxml" />-->
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>
