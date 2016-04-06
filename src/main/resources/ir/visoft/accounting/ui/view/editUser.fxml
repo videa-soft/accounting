@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?scenebuilder-stylesheet login.css?>
-<?import javafx.scene.text.*?>
+
+<?import com.sun.javafx.scene.control.skin.InputField?>
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import java.net.URL?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
-<?import com.sun.javafx.scene.control.skin.InputField?>
+<?import javafx.scene.text.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="ir.visoft.accounting.ui.controller.EditUserController">
-   <children>
-      <GridPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="491.0">
-         <children>
-            <TextField fx:id="username" GridPane.columnIndex="1" />
-            <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="nationalCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextArea fx:id="homeAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button onAction="#save" mnemonicParsing="false" text="Save" GridPane.rowIndex="5" />
-            <Label text="Username" />
-            <Label text="First name" GridPane.rowIndex="1" />
-            <Label text="Last name" GridPane.rowIndex="2" />
-            <Label text="national code" GridPane.rowIndex="3" />
-            <Label text="Home address" GridPane.rowIndex="4" />
-         </children>
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="196.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="558.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.EditUserController">
+  <children>
+    <GridPane layoutX="42.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="491.0">
+      <children>
+        <TextField fx:id="username" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="firstName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="lastName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="nationalCode" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextArea fx:id="homeAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="familyCnt" alignment="CENTER_RIGHT" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextArea fx:id="workAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+        <TextField fx:id="phoneNumber" alignment="CENTER_RIGHT" prefWidth="295.0" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label text="%username" GridPane.columnIndex="1" />
+        <Label text="%firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="%lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="%nationalCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="%HomeAddress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="%familyCount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="%workAddress" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Label text="%phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="308.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="183.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Button layoutX="282.0" layoutY="422.0" mnemonicParsing="false" onAction="#save" text="%Save" />
+  </children>
 </Pane>

@@ -30,6 +30,7 @@ public class LoginController extends BaseController {
     @FXML
     private void login(ActionEvent event) {
 
+
         String title = null;
         String header = null;
         String content = null;
@@ -39,6 +40,9 @@ public class LoginController extends BaseController {
             title = "Username/Password Error";
             header = "Username/Password Empty!";
             content = "Please Enter both username and password.";
+            title = resourceBundle.getString("Username_or_Password_Error").toString();
+            header = "";//Username/Password Empty!";
+            content = resourceBundle.getString("plz_insert_user_and_pass").toString();
         } else {
             User user = new User();
             user.setUsername(username.getText());
@@ -49,14 +53,14 @@ public class LoginController extends BaseController {
                 if(userList != null && !userList.isEmpty() && userList.size() == 1) {
                     authenticationSuccess = true;
                 } else {
-                    title = "Login Error";
-                    header = "Username/Password Wrong!";
-                    content = "You entered wrong credentials.";
+                    title = resourceBundle.getString("login_error").toString();
+                    header = "";// "Username/Password Wrong!";
+                    content = resourceBundle.getString("credentials_wrong").toString();
                 }
             } catch (DatabaseOperationException e) {
-                title = "Login Error";
-                header = "Operation Exception";
-                content = "There is an error in system operation.";
+                title = resourceBundle.getString("login_error").toString();
+                header = resourceBundle.getString("operation_system_exception").toString();
+                content = resourceBundle.getString("error_in_sys_operation").toString();
             }
 
         }

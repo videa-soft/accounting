@@ -2,6 +2,7 @@ package ir.visoft.accounting.db;
 
 import ir.visoft.accounting.annotation.EntityField;
 import ir.visoft.accounting.annotation.PK;
+import ir.visoft.accounting.annotation.SortDate;
 import ir.visoft.accounting.entity.BaseEntity;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
@@ -27,7 +28,29 @@ public class DatabaseUtil {
     private static Logger log = Logger.getLogger(DatabaseUtil.class.getName());
 
 
-    public static <T> List<T> getEntity(BaseEntity entity) throws DatabaseOperationException {
+    public static <T> List<T> getLastUpdated(BaseEntity entity) throws DatabaseOperationException,DeveloperFaultException {
+
+        String query = createSelectQuery(entity);
+
+        Set<Field> sortDateFields = findFields(entity.getClass(), SortDate.class);
+        if(sortDateFields != null){
+            for (Field sortDateField : sortDateFields) {
+                try {
+                    query += " AND " + getDBFieldName(sortDateField.getName()) + "=(select max(" + getDBFieldName(sortDateField.getName()) + ") from " + entity.getClass().getSimpleName() + ")";
+                } catch (Exception e) {
+                    log.error("Problem in database querying");
+                    log.error(e.getMessage());
+                    throw new DatabaseOperationException();
+                }
+            }
+        } else{
+            throw new DeveloperFaultException();
+        }
+        return getResult(query, entity);
+    }
+
+
+    public static String createSelectQuery(BaseEntity entity) throws DatabaseOperationException {
         String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
 
         Set<Field> entityFields = findFields(entity.getClass(), EntityField.class);
@@ -54,8 +77,15 @@ public class DatabaseUtil {
                 throw new DatabaseOperationException();
             }
         }
-        query = query.substring(0, query.length() - 4);
+        query = query.substring(0, query.length() - 4) + " ";
 
+        return query;
+    }
+    
+
+
+    public static <T> List<T> getEntity(BaseEntity entity) throws DatabaseOperationException {
+        String query = createSelectQuery(entity);
         return getResult(query, entity);
     }
 
@@ -192,6 +222,7 @@ public class DatabaseUtil {
                 throw new DatabaseOperationException();
             } catch (IllegalAccessException e) {
                 log.error("Problem in database querying...");
+                log.error("Problem in database querying");
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             }
@@ -241,13 +272,13 @@ public class DatabaseUtil {
                 throw new DatabaseOperationException();
             } catch (IllegalAccessException e) {
                 log.error("Problem in database querying...");
+                log.error("Problem in database querying");
                 log.error(e.getMessage());
                 throw new DatabaseOperationException();
             }
         }
         query = query.substring(0, query.length() - 2);
         query +=")";
-
         try {
             runQuery(query, DbOperation.INSERT);
         } catch (SQLException e) {
@@ -305,7 +336,7 @@ public class DatabaseUtil {
 
 
     public static <T extends BaseEntity> int getValidPrimaryKey(T entity) throws DeveloperFaultException, DatabaseOperationException {
-        int primaryKey = 0;
+        int primaryKey = 1;
         Set<Field> primaryKeyFields = findFields(entity.getClass(), PK.class);
         if(primaryKeyFields != null && !primaryKeyFields.isEmpty() && primaryKeyFields.size() ==1) {
             for (Field primaryKeyField : primaryKeyFields) {
@@ -320,7 +351,6 @@ public class DatabaseUtil {
                             while (rs.next()) {
                                 nextPrimaryKey = (Integer)rs.getObject(1);
                             }
-
                             return nextPrimaryKey + 1;
                         }
                     };

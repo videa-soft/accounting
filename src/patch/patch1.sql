@@ -13,7 +13,9 @@ CREATE TABLE USER (
 );
 
 
-CREATE TABLE ACCOUNT_BALANCE (
+
+CREATE TABLE ACCOUNTBALANCE (
+
   acc_id INT NOT NULL PRIMARY KEY,
   create_date DATE,
   debit INT,
@@ -29,14 +31,14 @@ CREATE TABLE ACCOUNT_BALANCE (
 CREATE TABLE BILL (
   bill_id INT NOT NULL PRIMARY KEY,
   previous_Date DATE,
-  create_date DATE,
+  new_date DATE,
   previous_figure INT,
   current_figure INT,
   cunsumption INT,
-  abonman FLOAT ,
+  abonman DOUBLE ,
   reduction INT,
   services INT,
-  cost_water INT,
+  cost_water DOUBLE,
   cost_balance INT,
   final_amount INT,
   user_id INT,

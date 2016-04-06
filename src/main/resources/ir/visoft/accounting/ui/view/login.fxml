@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?scenebuilder-stylesheet login.css?>
-<?import javafx.scene.text.*?>
+        
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import java.net.URL?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.visoft.accounting.ui.controller.LoginController">
-   <children>
-      <GridPane layoutX="416.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="428.0">
-         <children>
-            <Label text="%welcome" GridPane.columnIndex="1">
-               <font>
-                  <Font size="34.0" />
-               </font>
-            </Label>
-            <Label text="%username" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label text="%password" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="username" GridPane.rowIndex="1" />
-            <PasswordField fx:id="password" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="137.0" text="%enter" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="346.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="225.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0000999999975" prefWidth="795.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.LoginController">
+  <children>
+    <GridPane layoutX="260.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="456.0">
+      <children>
+        <Label text="%welcome" GridPane.columnIndex="1">
+          <font>
+            <Font size="34.0" />
+          </font>
+        </Label>
+        <Label text="%username" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <font>
+            <Font size="18.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label font="$x1" text="%password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="username" GridPane.rowIndex="1" />
+        <PasswordField fx:id="password" GridPane.rowIndex="2" />
+        <Button font="$x1" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="137.0" text="%enter" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="346.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="225.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+
 </Pane>

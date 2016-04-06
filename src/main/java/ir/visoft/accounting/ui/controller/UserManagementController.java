@@ -4,6 +4,7 @@ import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.ui.ApplicationContext;
+import ir.visoft.accounting.ui.UTF8Control;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,9 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * @author Amir
@@ -35,7 +38,7 @@ public class UserManagementController extends  BaseController {
     private TableView<User> usersTable;
 
     private User selectedUser;
-
+    
 
     @FXML
     public void initialize() {
@@ -47,27 +50,39 @@ public class UserManagementController extends  BaseController {
         try {
             users = DatabaseUtil.getAll(new User());
 
-            TableColumn userIdColumn = new TableColumn("UserId");
-            userIdColumn.setCellValueFactory(new PropertyValueFactory("userId"));
 
-            TableColumn firstNameColumn = new TableColumn("FirstName");
+            TableColumn userIdColumn = new TableColumn(resourceBundle.getString("userId"));
+            userIdColumn.setCellValueFactory(new PropertyValueFactory("userId"));
+            
+            TableColumn custNumColumn = new TableColumn(resourceBundle.getString("customerNumber"));
+            custNumColumn.setCellValueFactory(new PropertyValueFactory("customerNumber"));
+
+            TableColumn firstNameColumn = new TableColumn(resourceBundle.getString("firstName"));
             firstNameColumn.setCellValueFactory(new PropertyValueFactory("firstName"));
 
-            TableColumn lastNameColumn = new TableColumn("LastName");
+            TableColumn lastNameColumn = new TableColumn(resourceBundle.getString("lastName"));
             lastNameColumn.setCellValueFactory(new PropertyValueFactory("lastName"));
 
-            TableColumn homeAddressColumn = new TableColumn("HomeAddress");
+            TableColumn homeAddressColumn = new TableColumn(resourceBundle.getString("HomeAddress"));
             homeAddressColumn.setCellValueFactory(new PropertyValueFactory("homeAddress"));
 
-            TableColumn phoneNumberColumn = new TableColumn("PhoneNumber");
+            TableColumn phoneNumberColumn = new TableColumn(resourceBundle.getString("phoneNumber"));
             phoneNumberColumn.setCellValueFactory(new PropertyValueFactory("phoneNumber"));
 
-            TableColumn nationalCodeColumn = new TableColumn("NationalCode");
+            TableColumn nationalCodeColumn = new TableColumn(resourceBundle.getString("nationalCode"));
             nationalCodeColumn.setCellValueFactory(new PropertyValueFactory("nationalCode"));
+            
+            TableColumn familyCntColumn = new TableColumn(resourceBundle.getString("familyCount"));
+            familyCntColumn.setCellValueFactory(new PropertyValueFactory("familyCount"));
+            
+            TableColumn workAddressColumn = new TableColumn(resourceBundle.getString("workAddress"));
+            workAddressColumn.setCellValueFactory(new PropertyValueFactory("workAddress"));
+
 
             usersTable.getItems().removeAll();
             usersTable.getColumns().clear();
-            usersTable.getColumns().addAll(userIdColumn, firstNameColumn, lastNameColumn, homeAddressColumn, phoneNumberColumn, nationalCodeColumn);
+            usersTable.getColumns().addAll(userIdColumn, custNumColumn, firstNameColumn, lastNameColumn, nationalCodeColumn, familyCntColumn, homeAddressColumn,workAddressColumn ,phoneNumberColumn);
+
             usersTable.setItems(FXCollections.observableList(users));
         } catch (DatabaseOperationException e) {
             showOperationError();
@@ -82,25 +97,30 @@ public class UserManagementController extends  BaseController {
     @FXML
     private void onEditUser(ActionEvent event) {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
-        showEditUserDialog();
+
+        if(chkNullUser(selectedUser)) {
+            showEditUserDialog();
+        }
     }
 
 
     @FXML
     private void onRemoveUser(ActionEvent event) {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText("Delete User!");
-        alert.setContentText("Are you sure?");
+        if (chkNullUser(selectedUser)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle(resourceBundle.getString("Confirmation_Dialog"));
+            alert.setHeaderText(resourceBundle.getString("delete_user"));
+            alert.setContentText(resourceBundle.getString("are_you_sure"));
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            try {
-                DatabaseUtil.delete(selectedUser);
-                refresh();
-            } catch (DatabaseOperationException e) {
-                showOperationError();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    DatabaseUtil.delete(selectedUser);
+                    refresh();
+                } catch (DatabaseOperationException e) {
+                    showOperationError();
+                }
             }
         }
     }
@@ -113,7 +133,8 @@ public class UserManagementController extends  BaseController {
     }
 
     private void showEditUserDialog() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editUser.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editUser.fxml"), resourceBundle);
         Pane page = null;
         EditUserController controller = null;
         try {
@@ -127,7 +148,11 @@ public class UserManagementController extends  BaseController {
 
         // Create the dialog Stage.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Edit User");
+
+        if(selectedUser == null)
+            dialogStage.setTitle(resourceBundle.getString("AddUser"));
+        else
+            dialogStage.setTitle(resourceBundle.getString("EditUser"));
         dialogStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = null;
         if (page != null) {
@@ -139,4 +164,92 @@ public class UserManagementController extends  BaseController {
         dialogStage.setScene(scene);
         dialogStage.showAndWait();
     }
+    
+    @FXML
+    private void onEditBill(ActionEvent event) {
+        selectedUser = usersTable.getSelectionModel().getSelectedItem();
+        if (chkNullUser(selectedUser)) {
+            showEditBillDialog();
+        }
+    }
+    
+     private void showEditBillDialog() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editBill.fxml") ,resourceBundle);
+        Pane page = null;
+        EditBillController controller = null;
+        try {
+            page = loader.load();
+            controller = loader.<EditBillController>getController();
+            ApplicationContext.addController(controller);
+            controller.init(selectedUser);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(resourceBundle.getString("EditBill"));
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        Scene scene = null;
+        if (page != null) {
+            scene = new Scene(page);
+        }
+        if (controller != null) {
+            controller.setStage(dialogStage);
+        }
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
+    }
+     
+    @FXML
+    private void onEditAccunt(ActionEvent event) {
+        selectedUser = usersTable.getSelectionModel().getSelectedItem();
+        if (chkNullUser(selectedUser)) {
+            showEditAccDialog();
+        }
+    }
+    
+         private void showEditAccDialog() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editAccount.fxml") , resourceBundle);
+        Pane page = null;
+        EditAccountController controller = null;
+        try {
+            page = loader.load();
+            controller = loader.<EditAccountController>getController();
+            ApplicationContext.addController(controller);
+            controller.init(selectedUser);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+         //Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(resourceBundle.getString("EditAccount"));
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        Scene scene = null;
+        if (page != null) {
+            scene = new Scene(page);
+        }
+        if (controller != null) {
+            controller.setStage(dialogStage);
+        }
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
+    }
+
+     
+     private boolean chkNullUser(Object selectedUser){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(selectedUser == null){
+              alert.setTitle(resourceBundle.getString("error"));
+              alert.setHeaderText("");
+              alert.setContentText(resourceBundle.getString("not_selected_any_user"));
+              alert.showAndWait();
+              return false;
+         }
+        else
+            return true;
+     }
+ 
+
 }
