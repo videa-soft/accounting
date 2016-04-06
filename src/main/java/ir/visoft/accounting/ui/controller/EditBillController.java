@@ -7,10 +7,12 @@
 package ir.visoft.accounting.ui.controller;
 
 import ir.visoft.accounting.db.DatabaseUtil;
+import ir.visoft.accounting.entity.AccountBalance;
 import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
+import java.lang.reflect.Field;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
@@ -64,19 +66,51 @@ public class EditBillController extends BaseController {
     private TextField customerNumber;
     @FXML
     private TextField familyCnt;
+    @FXML
+    private TextField preBedehi ;
 
     @Override
     public void init(Object data) {
         selectedUser = (User)data;
         List<Bill> billList = null;
+        List<AccountBalance> accList = null;
         try {
             if (selectedUser != null) {
                 billList = DatabaseUtil.getEntity(new Bill(selectedUser.getUserId()));
-                //@TODO : init set for  PreDate, cost-balance
+                Integer maxBill = 0;
+                for(Bill bills : billList){
+                    if(maxBill < bills.getBillId())
+                        maxBill = bills.getBillId();
+                }
+                List<Bill> maxBillRecord = DatabaseUtil.getEntity(new Bill(selectedUser.getUserId(), maxBill));
+                if(maxBillRecord.size() > 0){
+                    preDate.setText(maxBillRecord.get(0).getNewDate().toString());
+                    preFigure.setText(maxBillRecord.get(0).getCurrentFigure().toString());
+                    cost_balance.setText(maxBillRecord.get(0).getReduction().toString());
+                }
+
                 customerNumber.setText(selectedUser.getCustomerNumber().toString());
                 familyCnt.setText(selectedUser.getFamilyCount().toString());
-                if (billList == null) {
 
+                if(preDate.getText().equals(""))
+                    preDate.setDisable(false);
+                else
+                    preDate.setDisable(true);
+                
+                if(preFigure.getText().equals(""))
+                    preFigure.setDisable(false);
+                else
+                    preFigure.setDisable(true);
+                
+                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
+                Integer maxAcc = 0 ;
+                for(AccountBalance account : accList){
+                    if(maxAcc < account.getAccId())
+                        maxAcc = account.getAccId();
+                }
+                List<AccountBalance> maxAccRecord = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId(),maxAcc));
+                if(maxAccRecord.size() > 0){
+                    preBedehi.setText(maxAccRecord.get(0).getAccountBalance().toString());
                 }
             }
         } catch (DatabaseOperationException e) {
@@ -94,10 +128,12 @@ public class EditBillController extends BaseController {
         java.sql.Date sqlPreDate = null;
         if(PreDate == null){
             this.preDate.setText("");
+            preDate.setDisable(false);
             return;
         }
-        else
+        else{
             sqlPreDate = new java.sql.Date( PreDate.getTime() );
+        }
         
         Date currentDate = convertStringToDate(this.currentDate.getText().toString());  
         java.sql.Date sqlCurrentDate = null;
@@ -112,6 +148,12 @@ public class EditBillController extends BaseController {
         Integer currentFigure = null;
         Integer familyCnt = null;
         Integer servicesInt;
+        Integer preBedehi = 0;
+        Integer costBalance = 0;
+        if(!this.preBedehi.getText().equals(""))
+            preBedehi = Integer.parseInt(this.preBedehi.getText());       
+        if(!this.cost_balance.getText().equals(""))
+            costBalance = Integer.parseInt(this.cost_balance.getText());    
         if(!this.preFigure.getText().equals(""))
             preFigure = Integer.parseInt(this.preFigure.getText());
         if(!this.currentFigure.getText().equals(""))
@@ -137,6 +179,15 @@ public class EditBillController extends BaseController {
             alert.setTitle(messageTitle);
             alert.setHeaderText(null);
             alert.setContentText(resourceBundle.getString("currentDate_is_equal_less_than_preDate!"));
+            alert.showAndWait();
+            return;
+        }
+        if(preFigure == null) {
+            this.preFigure.setDisable(false);
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(messageTitle);
+            alert.setHeaderText(null);
+            alert.setContentText(resourceBundle.getString("preFigure_is_null"));
             alert.showAndWait();
             return;
         }
@@ -200,12 +251,11 @@ public class EditBillController extends BaseController {
         /*------------------mohasebeye ghabli :
         Integer firstFig = Integer.parseInt(xInt.toString().substring(0, xInt.toString().length() - 1));
         Integer finalamount = (int)((familyCnt * b) * 1000 *(x - (5*firstFig))*(firstFig+1)); -----------------------*/
-        Integer finalamount = (int) ((familyCnt * b) * meter * (x - (5 * xInt)) * (xInt + 1));
-        
-//@TODO:        finalamount = finalamount + servicesInt + cost_balance + bedehie gozashte - bestankarie gozashte
-        
+        Integer finalamount = (int) ((familyCnt * b) * meter * (x - (5 * xInt)) * (xInt + 1));   
+        finalamount = finalamount + servicesInt + costBalance + preBedehi ;    
         Integer reductionInt = finalamount % 1000 ;
         finalamount = finalamount - reductionInt;
+        
         Double abonmanD = Double.parseDouble(new DecimalFormat("######.##").format(b * perAbonman * familyCnt));
         Double costWater = Double.parseDouble(new DecimalFormat("##.##").format(x));
         
@@ -231,7 +281,7 @@ public class EditBillController extends BaseController {
             bill.setReduction(reductionInt);
             bill.setServices(servicesInt);
             bill.setCostWater(costWater);
-            bill.setCostBalance(bill.getReduction());
+            bill.setCostBalance(costBalance);
             bill.setFinalAmount(finalamount);
            
             try {
@@ -244,6 +294,7 @@ public class EditBillController extends BaseController {
                     stage.close();
                 }
                 refreshView(BillManagementController.class);
+                refreshView(UserManagementController.class);
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 e.printStackTrace();
@@ -266,5 +317,5 @@ public class EditBillController extends BaseController {
         alert.setContentText(messageContent);
         alert.showAndWait();
     }
-    
+ 
 }

@@ -41,6 +41,11 @@ public class AccountBalance extends BaseEntity {
     public AccountBalance(Integer userId) {
         this.userId = userId;
     }
+    
+     public AccountBalance(Integer userId, Integer accId) {
+        this.userId = userId;
+        this.accId = accId ;
+    }
 
     public Integer getAccId() {
         return accId;

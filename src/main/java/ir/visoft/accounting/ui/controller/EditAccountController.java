@@ -8,6 +8,7 @@ package ir.visoft.accounting.ui.controller;
 
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.AccountBalance;
+import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
@@ -48,8 +49,18 @@ public class EditAccountController extends BaseController {
         List<AccountBalance> accList = null;
         try {
             if (selectedUser != null) {
-                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
                 customerNumber.setText(selectedUser.getCustomerNumber().toString());
+                
+                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
+                 Integer maxAcc = 0;
+                for(AccountBalance acc : accList){
+                    if(maxAcc < acc.getAccId())
+                        maxAcc = acc.getAccId();
+                }
+                List<AccountBalance> maxAccRecord = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId(), maxAcc));
+                if(maxAccRecord.size() > 0){
+                    accountBalance.setText(maxAccRecord.get(0).getAccountBalance().toString());
+                }
             }
         } catch (DatabaseOperationException e) {
 ////            messageTitle = "";
@@ -75,6 +86,8 @@ public class EditAccountController extends BaseController {
         Integer credit = 0;
         Integer accBalance = 0;
         String desc = this.description.getText();
+        if(!this.accountBalance.getText().equals(""))
+            accBalance = Integer.parseInt(this.accountBalance.getText().toString());
         if(!this.debit.getText().equals(""))
             debitInt = Integer.parseInt(this.debit.getText());
         if(!this.credit.getText().equals(""))
@@ -103,7 +116,7 @@ public class EditAccountController extends BaseController {
             return;
         }
            else{
-               accBalance = debitInt - credit; // @TODO: az accBalance ghabli ham kam shavad
+               accBalance = accBalance + (debitInt - credit);
 //               if(accBalance < 0){
 //                   alert = new Alert(Alert.AlertType.ERROR);
 //                   alert.setTitle("accountBalance");
@@ -135,7 +148,7 @@ public class EditAccountController extends BaseController {
                 if (stage != null) {
                     stage.close();
                 }
-                refreshView(UserManagementController.class);
+                refreshView(AccBalanceManagementController.class);
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 e.printStackTrace();

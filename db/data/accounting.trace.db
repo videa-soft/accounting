@@ -4430,3 +4430,138 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:F:/repo/acco
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:342)
 	... 29 more
+2016-04-06 18:25:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM BILL WH  AND[*] BILL_ID=(SELECT MAX(BILL_ID) FROM BILL) AND NEW_DATE=(SELECT MAX(NEW_DATE) FROM BILL) "; SQL statement:
+SELECT * FROM Bill WH  AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42000-191]
+2016-04-06 18:29:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM BILL WH  AND[*] BILL_ID=(SELECT MAX(BILL_ID) FROM BILL) AND NEW_DATE=(SELECT MAX(NEW_DATE) FROM BILL) "; SQL statement:
+SELECT * FROM Bill WH  AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42000-191]
+2016-04-06 18:39:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "USERID" not found; SQL statement:
+SELECT * FROM Bill WHERE userId=100 AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:73)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:276)
+	at org.apache.commons.dbutils.AbstractQueryRunner.prepareStatement(AbstractQueryRunner.java:154)
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:345)
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:226)
+	at ir.visoft.accounting.db.DatabaseUtil.runQuery(DatabaseUtil.java:326)
+	at ir.visoft.accounting.db.DatabaseUtil.getResult(DatabaseUtil.java:118)
+	at ir.visoft.accounting.db.DatabaseUtil.getLastUpdated(DatabaseUtil.java:49)
+	at ir.visoft.accounting.ui.controller.EditBillController.main(EditBillController.java:275)
+2016-04-06 18:43:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "USERID" not found; SQL statement:
+SELECT * FROM Bill WHERE userId=100 AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:73)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:276)
+	at org.apache.commons.dbutils.AbstractQueryRunner.prepareStatement(AbstractQueryRunner.java:154)
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:345)
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:226)
+	at ir.visoft.accounting.db.DatabaseUtil.runQuery(DatabaseUtil.java:326)
+	at ir.visoft.accounting.db.DatabaseUtil.getResult(DatabaseUtil.java:118)
+	at ir.visoft.accounting.db.DatabaseUtil.getLastUpdated(DatabaseUtil.java:49)
+	at ir.visoft.accounting.ui.controller.EditBillController.main(EditBillController.java:275)
+2016-04-06 18:43:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "USERID" not found; SQL statement:
+SELECT * FROM Bill WHERE userId=100 AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:130)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-04-06 18:44:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Column "NEW_DATE" not found; SQL statement:
+SELECT * FROM Bill WHERE user_Id=100 AND bill_Id=(select max(bill_Id) from Bill) AND new_Date=(select max(new_Date) from Bill) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:131)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2016-04-06 19:43:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "NATIONAL_CODE VARCHAR(10)": "'444444444444' (12)"; SQL statement:
+UPDATE User SET national_Code='444444444444', first_Name='gh', last_Name='sh', family_Count='4', username='ghaz', user_Id='100', work_Address='ییییییییییی' WHERE user_Id = '100'  [22001-191]
+2016-04-06 19:50:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM BILL 
+GROUP BY USER _ID[*]
+HAVING USER_ID = 100 "; SQL statement:
+SELECT * FROM Bill 
+group by user _Id
+having user_Id = 100 [42000-191]
+2016-04-06 19:50:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT USER_ID,* FROM BILL 
+GROUP BY USER _ID[*]
+HAVING USER_ID = 100 "; SQL statement:
+SELECT user_Id,* FROM Bill 
+group by user _Id
+having user_Id = 100 [42000-191]
+2016-04-06 19:51:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT USER_ID,BILL_ID FROM BILL 
+GROUP BY USER _ID[*]
+HAVING USER_ID = 100 "; SQL statement:
+SELECT user_Id,bill_Id FROM Bill 
+group by user _Id
+having user_Id = 100 [42000-191]
+2016-04-06 19:52:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT USER_ID,BILL_ID FROM BILL 
+GROUP BY USER _ID[*] "; SQL statement:
+SELECT user_Id,bill_Id FROM Bill 
+group by user _Id [42000-191]
+2016-04-06 19:52:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT USER_ID,BILL_ID FROM BILL 
+GROUP BY USER _ID[*] "; SQL statement:
+SELECT user_Id,bill_Id FROM Bill 
+group by user _Id [42000-191]

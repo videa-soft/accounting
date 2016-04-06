@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.net.URL?>
@@ -20,6 +19,11 @@
         <Tab text="%Bill">
           <content>
             <fx:include fx:id="billManagementTab" source="billManagement.fxml" />
+          </content>
+        </Tab>
+        <Tab text="%accountBalanceTab">
+          <content>
+            <fx:include fx:id="accBalanceManagementTab" source="accBalanceManagement.fxml"/>
           </content>
         </Tab>
       </tabs>

@@ -1,0 +1,21 @@
+2016-04-06 17:50:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='ghaz'   [42102-191]
+2016-04-06 17:50:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir'   [42102-191]
+2016-04-06 17:51:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir_noori'   [42102-191]
+2016-04-06 17:53:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir_noori'   [42102-191]
+2016-04-06 17:55:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir_noori'   [42102-191]
+2016-04-06 17:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir_noori'   [42102-191]
+2016-04-06 17:58:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT * FROM User WHERE password='123' AND username='amir_noori'   [42102-191]

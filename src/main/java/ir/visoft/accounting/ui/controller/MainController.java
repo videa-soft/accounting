@@ -14,16 +14,21 @@ public class MainController extends BaseController {
     private AnchorPane userManagementTab;
     @FXML
     private AnchorPane billManagementTab;
+    @FXML
+    private AnchorPane accBalanceManagementTab;
 
     @FXML
     private UserManagementController userManagementTabController;
     @FXML
     private BillManagementController billManagementTabController;
+    @FXML
+    private AccBalanceManagementController accBalanceManagementTabController;
 
     @FXML
     private void initialize() {
         ApplicationContext.addController(userManagementTabController);
         ApplicationContext.addController(billManagementTabController);
+        ApplicationContext.addController(accBalanceManagementTabController);
     }
 
 }

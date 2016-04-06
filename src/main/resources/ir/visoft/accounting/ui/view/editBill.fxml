@@ -22,10 +22,10 @@
         <TextField fx:id="familyCnt" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6" />
         <Label text="%cunsumption" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <TextField fx:id="cunsumption" alignment="CENTER_RIGHT" disable="true" focusTraversable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Label text="%final_amount" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-        <TextField fx:id="final_amount" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="12" />
-        <Label text="%reduction" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <TextField fx:id="reduction" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+        <Label text="%final_amount" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+        <TextField fx:id="final_amount" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="13" />
+        <Label text="%reduction" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+        <TextField fx:id="reduction" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="12" />
         <Label text="%abonman" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <Label text="%services" GridPane.columnIndex="1" GridPane.rowIndex="8" />
         <Label text="%cost_water" GridPane.columnIndex="1" GridPane.rowIndex="9" />
@@ -39,6 +39,8 @@
         <Label text="%preDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="%customerNumber" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="%currentFigure" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="%preBedehi" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+        <TextField fx:id="preBedehi" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
       </children>
       <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />
@@ -53,6 +55,7 @@
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="SOMETIMES" />
