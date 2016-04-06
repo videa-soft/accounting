@@ -1,19 +1,21 @@
 package ir.visoft.accounting.ui.controller;
 
+import com.itextpdf.text.DocumentException;
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.exception.DatabaseOperationException;
-import ir.visoft.accounting.ui.UTF8Control;
+import ir.visoft.accounting.util.PdfUtil;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
+
 
 
 
@@ -23,7 +25,7 @@ import java.util.logging.Logger;
 public class BillManagementController extends BaseController {
     
     
-    private static final Logger LOG = Logger.getLogger(BillManagementController.class.getName());
+    private static Logger log = Logger.getLogger(BillManagementController.class.getName());
 
      @FXML
     private TableView<Bill> billTable;
@@ -88,4 +90,30 @@ public class BillManagementController extends BaseController {
             showOperationError();
         }
     }
+
+    @FXML
+    private void printBill() {
+        selectedBill = billTable.getSelectionModel().getSelectedItem();
+        Alert alert;
+        if(selectedBill == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
+            alert.showAndWait();
+        } else {
+            try {
+                PdfUtil.createBillPdf(selectedBill);
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("");
+                alert.setContentText(resourceBundle.getString("requested_operation_has_been_done_successfully"));
+                alert.showAndWait();
+            } catch (DocumentException | IOException e) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
+                alert.showAndWait();
+                log.error(e.getMessage());
+            }
+        }
+    }
+
 }

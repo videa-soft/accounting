@@ -50,6 +50,10 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
+    public User(Integer userId) {
+        this.userId = userId;
+    }
+
     public User() {}
 
 

@@ -351,7 +351,11 @@ public class DatabaseUtil {
                             while (rs.next()) {
                                 nextPrimaryKey = (Integer)rs.getObject(1);
                             }
-                            return nextPrimaryKey + 1;
+                            if(nextPrimaryKey == null) {
+                                return  1;
+                            } else {
+                                return nextPrimaryKey + 1;
+                            }
                         }
                     };
 
