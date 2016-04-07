@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.scene.image.Image;
 
 public class Main extends Application {
 
@@ -20,6 +21,7 @@ public class Main extends Application {
         root.getStylesheets().add("/css/login.css");
 
         primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.getIcons().add(new Image(("file:logo.jpg")));
         primaryStage.show();
     }
 

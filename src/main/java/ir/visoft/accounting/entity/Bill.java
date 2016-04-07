@@ -63,6 +63,11 @@ public class Bill extends BaseEntity {
     public Bill(Integer userId) {
         this.userId = userId;
     }
+    
+     public Bill(Integer userId, Integer billId) {
+        this.userId = userId;
+        this.billId = billId;
+    }
 
     public Bill() {}
 

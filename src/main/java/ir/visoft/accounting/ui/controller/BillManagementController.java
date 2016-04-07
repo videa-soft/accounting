@@ -73,13 +73,16 @@ public class BillManagementController extends BaseController {
             
             TableColumn costWaterColumn = new TableColumn(resourceBundle.getString("cost_water"));
             costWaterColumn.setCellValueFactory(new PropertyValueFactory("costWater"));
+            
+            TableColumn costBalanceColumn = new TableColumn(resourceBundle.getString("cost_balance"));
+            costBalanceColumn.setCellValueFactory(new PropertyValueFactory("costBalance"));
 
             TableColumn finalAmountColumn = new TableColumn(resourceBundle.getString("final_amount"));
             finalAmountColumn.setCellValueFactory(new PropertyValueFactory("finalAmount"));
 
             billTable.getItems().removeAll();
             billTable.getColumns().clear();
-            billTable.getColumns().addAll(userIdColumn, billIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn, finalAmountColumn);
+            billTable.getColumns().addAll(userIdColumn, billIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn,costBalanceColumn, finalAmountColumn);
             billTable.setItems(FXCollections.observableList(Bill));
         } catch (DatabaseOperationException e) {
             showOperationError();
