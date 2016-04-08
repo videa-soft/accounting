@@ -27,6 +27,37 @@ public class DatabaseUtil {
 
     private static Logger log = Logger.getLogger(DatabaseUtil.class.getName());
 
+    public static Long getCount(BaseEntity entity) throws DatabaseOperationException,DeveloperFaultException {
+
+        Long count = 0L;
+        String query = createCountQuery(entity);
+        QueryRunner run = new QueryRunner();
+        Connection connection = Database.getConnection();
+        if(connection != null) {
+            ResultSetHandler<Long> h = new ResultSetHandler<Long>() {
+                public Long handle(ResultSet rs) throws SQLException {
+
+                    Long count = 0L;
+                    while (rs.next()) {
+                        count = (Long)rs.getObject(1);
+                    }
+                    if(count == null) {
+                        return  0L;
+                    } else {
+                        return count;
+                    }
+                }
+            };
+
+            try {
+                count = run.query(connection, query, h);
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+                throw new DatabaseOperationException();
+            }
+        }
+        return count;
+    }
 
     public static <T> List<T> getLastUpdated(BaseEntity entity) throws DatabaseOperationException,DeveloperFaultException {
 
@@ -49,9 +80,16 @@ public class DatabaseUtil {
         return getResult(query, entity);
     }
 
+    public static String createCountQuery(BaseEntity entity) throws DatabaseOperationException {
+        return createQuery(entity, "count(*)");
+    }
 
     public static String createSelectQuery(BaseEntity entity) throws DatabaseOperationException {
-        String query = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
+        return createQuery(entity, "*");
+    }
+
+    public static String createQuery(BaseEntity entity, String selector) throws DatabaseOperationException {
+        String query = "SELECT " + selector + " FROM " + entity.getClass().getSimpleName() + " WHERE ";
 
         Set<Field> entityFields = findFields(entity.getClass(), EntityField.class);
         for (Field entityField : entityFields) {

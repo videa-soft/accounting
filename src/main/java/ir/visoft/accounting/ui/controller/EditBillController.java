@@ -12,7 +12,6 @@ import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
-import java.lang.reflect.Field;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
@@ -114,10 +113,7 @@ public class EditBillController extends BaseController {
                 }
             }
         } catch (DatabaseOperationException e) {
-//            messageTitle = "";
-//            messageHeader = "Operation Exception!";
-//            messageContent = "There is an error in system operation!";
-            e.printStackTrace();
+            showOperationError();
         }
     }
    

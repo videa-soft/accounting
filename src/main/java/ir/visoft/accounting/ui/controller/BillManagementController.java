@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.exception.DatabaseOperationException;
+import ir.visoft.accounting.exception.DeveloperFaultException;
 import ir.visoft.accounting.util.FileUtil;
 import ir.visoft.accounting.util.PdfUtil;
 import ir.visoft.accounting.util.PropUtil;
@@ -103,7 +104,10 @@ public class BillManagementController extends BaseController {
             alert.showAndWait();
         } else {
             try {
-                String fileName = PropUtil.getString("bill.report.base.path") + "bill.pdf";
+                Bill bill = new Bill();
+                bill.setUserId(selectedBill.getUserId());
+                DatabaseUtil.getCount(bill);
+                String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
                 PdfUtil.createBillPdf(selectedBill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -124,6 +128,10 @@ public class BillManagementController extends BaseController {
                 alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
                 alert.showAndWait();
                 log.error(e.getMessage());
+            } catch (DatabaseOperationException e) {
+                log.error(e.getMessage());
+            } catch (DeveloperFaultException e) {
+                e.printStackTrace();
             }
         }
     }
