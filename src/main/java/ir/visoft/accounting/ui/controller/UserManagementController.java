@@ -4,7 +4,6 @@ import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.ui.ApplicationContext;
-import ir.visoft.accounting.ui.UTF8Control;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,9 +21,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 /**
  * @author Amir
@@ -134,7 +131,7 @@ public class UserManagementController extends  BaseController {
 
     private void showEditUserDialog() {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editUser.fxml"), resourceBundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editUser.fxml"), resourceBundle);
         Pane page = null;
         EditUserController controller = null;
         try {
@@ -174,7 +171,7 @@ public class UserManagementController extends  BaseController {
     }
     
      private void showEditBillDialog() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editBill.fxml") ,resourceBundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editBill.fxml") ,resourceBundle);
         Pane page = null;
         EditBillController controller = null;
         try {
@@ -210,7 +207,7 @@ public class UserManagementController extends  BaseController {
     }
     
          private void showEditAccDialog() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editAccount.fxml") , resourceBundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editAccount.fxml") , resourceBundle);
         Pane page = null;
         EditAccountController controller = null;
         try {

@@ -72,7 +72,7 @@ public class LoginController extends BaseController {
             alert.setContentText(content);
             alert.showAndWait();
         } else {
-            changeScene("../view/main.fxml", getStage(event));
+            changeScene("main.fxml", getStage(event));
         }
     }
 

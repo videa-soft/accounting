@@ -14,7 +14,6 @@ public class Bill extends BaseEntity {
     
     @EntityField
     @PK
-    @SortDate
     private Integer billId;
     @EntityField
     private Date previousDate;

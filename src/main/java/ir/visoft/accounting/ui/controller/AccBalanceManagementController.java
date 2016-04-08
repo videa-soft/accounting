@@ -1,31 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ir.visoft.accounting.ui.controller;
 
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.AccountBalance;
-import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.exception.DatabaseOperationException;
-import static ir.visoft.accounting.ui.controller.BaseController.resourceBundle;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 /**
- * FXML Controller class
  *
- * @author Lenovo
+ * @author Ghazaleh
  */
 public class AccBalanceManagementController extends BaseController {
 

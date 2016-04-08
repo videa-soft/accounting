@@ -28,6 +28,8 @@ public abstract class BaseController {
 
     private static Logger log = Logger.getLogger(BaseEntity.class.getName());
 
+    public static final String VIEW_BASE_URL = "/ir/visoft/accounting/ui/view/";
+
     protected static final ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.message", new Locale("fa"), new UTF8Control());
 
     protected Stage stage;
@@ -38,9 +40,6 @@ public abstract class BaseController {
     public static Date convertStringToDate(String dateString) {
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
-//        String title ;
-//        String header ;
-//        String content ;
         if (dateString.equals("")) {
             alert.setTitle(resourceBundle.getString("error"));
             alert.setHeaderText("");
@@ -106,7 +105,7 @@ public abstract class BaseController {
     
      protected void changeScene(String viewName, Stage stage) {
          
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName), resourceBundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + viewName), resourceBundle);
         Parent root = null;
         try {
             root = loader.load();
