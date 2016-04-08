@@ -116,7 +116,12 @@ public class UserManagementController extends  BaseController {
                     DatabaseUtil.delete(selectedUser);
                     refresh();
                 } catch (DatabaseOperationException e) {
-                    showOperationError();
+                    Alert alertError = new Alert(Alert.AlertType.ERROR);
+                    alertError.setTitle(resourceBundle.getString("error"));
+                    alertError.setHeaderText("");
+                    alertError.setContentText(resourceBundle.getString("cannot_delete_for_dependency"));
+                    alertError.showAndWait();
+//                    showOperationError();
                 }
             }
         }
