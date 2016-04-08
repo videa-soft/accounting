@@ -6,12 +6,18 @@
 
 package ir.visoft.accounting.ui.controller;
 
+import com.itextpdf.text.DocumentException;
 import ir.visoft.accounting.db.DatabaseUtil;
 import ir.visoft.accounting.entity.AccountBalance;
 import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
+import static ir.visoft.accounting.ui.controller.BaseController.resourceBundle;
+import ir.visoft.accounting.util.FileUtil;
+import ir.visoft.accounting.util.PdfUtil;
+import ir.visoft.accounting.util.PropUtil;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,6 +28,7 @@ import org.apache.log4j.Logger;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -40,6 +47,9 @@ public class EditBillController extends BaseController {
     private TableView<Bill> billTable;
 
     private User selectedUser;
+    
+    private Bill bill;
+    
     @FXML
     private TextField preDate;
     @FXML
@@ -68,7 +78,11 @@ public class EditBillController extends BaseController {
     private TextField familyCnt;
     @FXML
     private TextField preBedehi ;
-
+    @FXML
+    private Button computationId;
+    @FXML
+    private Button showBillId;
+    
     @Override
     public void init(Object data) {
         selectedUser = (User)data;
@@ -227,19 +241,19 @@ public class EditBillController extends BaseController {
             else{
                 Integer diffMount = currentmount - mount;
                 for (int i = 1; diffMount != 1; i++) {
-                    b = b + checkMount(currentmount - i).doubleValue();
+                    b = b + checkMonth(currentmount - i).doubleValue();
                     diffMount--;
                 }
-                b = b + (checkMount(mount).doubleValue() - day) + currentday;
+                b = b + (checkMonth(mount).doubleValue() - day) + currentday;
             }
         }
         else{
-            b = checkMount(mount).doubleValue() - day ;
+            b = checkMonth(mount).doubleValue() - day ;
             for (int i = 1; (mount + i) < 13; i++) {
-                b = b + checkMount(mount + i).doubleValue();
+                b = b + checkMonth(mount + i).doubleValue();
             }
             for(int i = 1 ; (currentmount - i) > 0 ; i++){
-                b = b + checkMount(currentmount - i ).doubleValue();
+                b = b + checkMonth(currentmount - i ).doubleValue();
             }
             b = b + currentday;
         }
@@ -268,7 +282,7 @@ public class EditBillController extends BaseController {
         boolean validate = true;
         
         if(validate) {
-            Bill bill = new Bill();
+            bill = new Bill();
             if(selectedUser != null) {
                 bill.setUserId(selectedUser.getUserId());
             }
@@ -290,9 +304,9 @@ public class EditBillController extends BaseController {
                     bill.setBillId(primaryKey);
                     DatabaseUtil.create(bill);
                 }
-                if (stage != null) {
-                    stage.close();
-                }
+//                if (stage != null) {
+//                    stage.close();
+//                }
                 refreshView(BillManagementController.class);
                 refreshView(UserManagementController.class);
                 alert = new Alert(Alert.AlertType.INFORMATION);
@@ -312,10 +326,46 @@ public class EditBillController extends BaseController {
         } else {
             alert = new Alert(Alert.AlertType.WARNING);
         }
+        computationId.setDisable(true);
+        showBillId.setDisable(false);
         alert.setTitle(messageTitle);
         alert.setHeaderText(resourceBundle.getString("Operation_successful"));
         alert.setContentText(messageContent);
         alert.showAndWait();
+    }
+    
+      @FXML
+    private void showBill() {
+        Alert alert;
+        if(bill == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
+            alert.showAndWait();
+        } else {
+            try {
+                String fileName = PropUtil.getString("bill.report.base.path") +bill.getUserId()+ ".pdf";
+                PdfUtil.createBillPdf(bill, fileName);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                try {
+                                    FileUtil.openFile(fileName);
+                                } catch (IOException e) {
+                                    log.error(e.getMessage());
+                                }
+                            }
+                        },
+                        1000
+                );
+
+            } catch (DocumentException | IOException e) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
+                alert.showAndWait();
+                log.error(e.getMessage());
+            }
+        }
     }
  
 }

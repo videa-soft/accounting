@@ -73,7 +73,7 @@ public abstract class BaseController {
                 alert.setContentText(resourceBundle.getString("mount_is_not_correct"));
                 alert.showAndWait();
                 return null;
-            } else if (day > 31) {
+            } else if (day > checkMonth(mount)) {
                 alert.setTitle(resourceBundle.getString("error"));
                 alert.setHeaderText("");
                 alert.setContentText(resourceBundle.getString("day_is_not_correct"));
@@ -89,7 +89,7 @@ public abstract class BaseController {
         return date;
     }
     
-    public static Integer checkMount(Integer mount){
+    public static Integer checkMonth(Integer mount){
         if(mount.equals(01) || mount.equals(02) || mount.equals(03) || mount.equals(04) || mount.equals(05) || mount.equals(06))
             return 31 ;
         else
