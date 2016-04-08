@@ -35,7 +35,7 @@ public class PdfUtil {
         Calendar calendar = Calendar.getInstance();
         String dateAsString = calendar.get(Calendar.YEAR) + "-" + calendar.get(Calendar.MONTH)+ "-"+ calendar.get(Calendar.DAY_OF_MONTH) + "_(" +
                 calendar.get(Calendar.HOUR) + "-" + calendar.get(Calendar.MINUTE) + "-" + calendar.get(Calendar.SECOND) + ")";
-        createBillPdf(bill, System.getProperty("user.home") + "\\Desktop\\bill_" + dateAsString + ".pdf");
+        createBillPdf(bill, System.getProperty("user.home") + "\\Desktop\\bill\\bill_" + dateAsString + ".pdf");
     }
 
     public static void createBillPdf(Bill bill, String fileName) throws DocumentException, IOException {
@@ -90,34 +90,42 @@ public class PdfUtil {
         PdfPCell customerNumberCell = new PdfPCell(customerNumber);
         customerNumberCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         customerNumberCell.setBorder(0);
+        customerNumberCell.setMinimumHeight(25);
 
         PdfPCell customerNameCell = new PdfPCell(customerName);
         customerNameCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         customerNameCell.setBorder(0);
+        customerNameCell.setMinimumHeight(25);
 
         PdfPCell familyCountCell = new PdfPCell(familyCount);
         familyCountCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         familyCountCell.setBorder(0);
+        familyCountCell.setMinimumHeight(25);
 
         PdfPCell preDateCell = new PdfPCell(preDate);
         preDateCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         preDateCell.setBorder(0);
+        preDateCell.setMinimumHeight(25);
 
         PdfPCell currentDateCell = new PdfPCell(currentDate);
         currentDateCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         currentDateCell.setBorder(0);
+        currentDateCell.setMinimumHeight(25);
 
         PdfPCell previousFigureCell = new PdfPCell(previousFigure);
         previousFigureCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         previousFigureCell.setBorder(0);
+        previousFigureCell.setMinimumHeight(25);
 
         PdfPCell currentFigureCell = new PdfPCell(currentFigure);
         currentFigureCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         currentFigureCell.setBorder(0);
+        currentFigureCell.setMinimumHeight(25);
 
         PdfPCell cunsumptionCell = new PdfPCell(cunsumption);
         cunsumptionCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         cunsumptionCell.setBorder(0);
+        cunsumptionCell.setMinimumHeight(25);
 
         table.addCell(customerNumberCell);
         table.addCell(customerNameCell);

@@ -13,22 +13,20 @@ import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.exception.DeveloperFaultException;
-import static ir.visoft.accounting.ui.controller.BaseController.resourceBundle;
 import ir.visoft.accounting.util.FileUtil;
 import ir.visoft.accounting.util.PdfUtil;
 import ir.visoft.accounting.util.PropUtil;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -128,10 +126,7 @@ public class EditBillController extends BaseController {
                 }
             }
         } catch (DatabaseOperationException e) {
-//            messageTitle = "";
-//            messageHeader = "Operation Exception!";
-//            messageContent = "There is an error in system operation!";
-            e.printStackTrace();
+            showOperationError();
         }
     }
    
