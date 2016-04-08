@@ -53,7 +53,7 @@ public class PdfUtil {
 
         BaseFont baseFont = null;
         try {
-            baseFont = BaseFont.createFont("./fonts/baran.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            baseFont = BaseFont.createFont("/fonts/baran.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         } catch (IOException e) {
             e.printStackTrace();
         }
