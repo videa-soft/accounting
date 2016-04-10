@@ -106,6 +106,48 @@ public class BillManagementController extends BaseController {
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
                 PdfUtil.createBillPdf(selectedBill, fileName);
+//                new java.util.Timer().schedule(
+//                        new java.util.TimerTask() {
+//                            @Override
+//                            public void run() {
+//                                try {
+//                                    FileUtil.openFile(fileName);
+//                                } catch (IOException e) {
+//                                    log.error(e.getMessage());
+//                                }
+//                            }
+//                        },
+//                        1000
+//                );
+
+            } catch (DocumentException | IOException e) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
+                alert.showAndWait();
+                log.error(e.getMessage());
+            } catch (DatabaseOperationException e) {
+                log.error(e.getMessage());
+            } catch (DeveloperFaultException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+     @FXML
+    private void showBill() {
+        selectedBill = billTable.getSelectionModel().getSelectedItem();
+        Alert alert;
+        if(selectedBill == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
+            alert.showAndWait();
+        } else {
+            try {
+                Bill bill = new Bill();
+                bill.setUserId(selectedBill.getUserId());
+                DatabaseUtil.getCount(bill);
+                String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
+                PdfUtil.createBillPdf(selectedBill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
                             @Override

@@ -16,6 +16,7 @@ import java.util.List;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.event.EventType;
 
 public class EditUserController extends BaseController {
 
@@ -33,7 +34,6 @@ public class EditUserController extends BaseController {
     private TextField nationalCode;
     @FXML
     private TextArea homeAddress;
-
     @FXML
     private TextField familyCnt;
     @FXML
@@ -46,6 +46,7 @@ public class EditUserController extends BaseController {
     @Override
     public void init(Object data) {
         selectedUser = (User)data;
+//        nationalCode.addEventFilter(EventType., this);
         if(selectedUser != null) {
             username.setText(selectedUser.getUsername());
             firstName.setText(selectedUser.getFirstName());
@@ -60,24 +61,20 @@ public class EditUserController extends BaseController {
 
     @FXML
     private void save() {
+        String messageTitle = "";
+        String messageHeader = resourceBundle.getString("Operation_successful").toString();
+        String messageContent = "";
+        boolean validate = true;
+        
         String username = this.username.getText();
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
         String nationalCode = this.nationalCode.getText();
         String homeAddress = this.homeAddress.getText();
-
-        String messageTitle = "";
-        String messageHeader = "Operation successful";
-        String messageContent = "";
         String workAddress = this.workAddress.getText();
         String phoneNumber = this.phoneNumber.getText();
         Integer familyCnt = null;
-        if(!this.familyCnt.getText().equals(""))
-            familyCnt = Integer.parseInt(this.familyCnt.getText());
-
-        messageHeader = resourceBundle.getString("Operation_successful").toString();
-
-        boolean validate = true;
+        
         if(username == null || username.equals("")) {
             messageTitle = "";
             messageHeader = resourceBundle.getString("usename_is_null").toString();
@@ -101,9 +98,37 @@ public class EditUserController extends BaseController {
             messageHeader = resourceBundle.getString("nationalCode_is_null").toString();
             messageContent = "";
             validate = false;
-        } else if(familyCnt == null || familyCnt.equals(null)) {
+        }
+        else if (!nationalCode.matches("[0-9]+")) {
+            messageTitle = "";
+            messageHeader = resourceBundle.getString("nationalCode_must_be_num").toString();
+            messageContent = "";
+            validate = false;
+        }
+        else if(this.nationalCode.getText().length() != 10 ){
+            messageTitle = "";
+            messageHeader = resourceBundle.getString("nationalCode_must_be_ten").toString();
+            messageContent = "";
+            validate = false;
+        }
+        else if(this.familyCnt.getText().equals("")){
             messageTitle = "";
             messageHeader = resourceBundle.getString("familyCount_is_null").toString();
+            messageContent = "";
+            validate = false;
+        }
+        else if (!this.familyCnt.getText().equals("")) {
+            if (this.familyCnt.getText().matches("[0-9]+")) {
+                familyCnt = Integer.parseInt(this.familyCnt.getText());
+            } else {
+                messageTitle = "";
+                messageHeader = resourceBundle.getString("familyCnt_must_be_num").toString();
+                messageContent = "";
+                validate = false;
+            }
+        } else if (!phoneNumber.matches("[0-9]+")) {
+            messageTitle = "";
+            messageHeader = resourceBundle.getString("phoneNum_must_be_num").toString();
             messageContent = "";
             validate = false;
         } else {

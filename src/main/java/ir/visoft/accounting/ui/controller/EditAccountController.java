@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -39,7 +40,7 @@ public class EditAccountController extends BaseController {
     @FXML
     private TextField accountBalance;
     @FXML
-    private TextField description;
+    private TextArea description;
     @FXML
     private TextField customerNumber;
     

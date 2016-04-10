@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import ir.visoft.accounting.db.DatabaseUtil;
+import ir.visoft.accounting.entity.AccountBalance;
 import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
@@ -14,6 +15,7 @@ import ir.visoft.accounting.ui.UTF8Control;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import static java.lang.Math.abs;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -44,8 +46,16 @@ public class PdfUtil {
 
         Document document = createPdf(fileName);
         User user = new User(bill.getUserId());
+        AccountBalance accEntity = new AccountBalance(bill.getUserId());
+        boolean acc = false;
         try {
             user = (User)DatabaseUtil.getEntity(user).get(0);
+            if(DatabaseUtil.getEntity(accEntity) != null){
+                accEntity = (AccountBalance) DatabaseUtil.getEntity(accEntity).get(0);
+                acc = true;
+            }
+            else
+                acc = false;
         } catch (DatabaseOperationException e) {
             e.printStackTrace();
         }
@@ -57,34 +67,80 @@ public class PdfUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Font font = new Font(baseFont, 12);
-        PdfPTable table = new PdfPTable(1);
+        Font font = new Font(baseFont, 14);
+        Font fontB =  new Font(baseFont, 15, Font.BOLD);
+        PdfPTable table = new PdfPTable(3);
         table.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
 
-        Paragraph customerNumber = new Paragraph(resourceBundle.getString("customerNumber") + " : " + user.getCustomerNumber(), font);
+        Paragraph customerNumber = new Paragraph(resourceBundle.getString("customerNumber") + " :  " + user.getCustomerNumber(), font);
         customerNumber.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph customerName = new Paragraph(resourceBundle.getString("customerName") + " : " + user.getFirstName() + " " + user.getLastName(), font);
+        Paragraph customerName = new Paragraph(resourceBundle.getString("customerName") + " :  " + user.getFirstName() + " " + user.getLastName(), font);
         customerName.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph familyCount = new Paragraph( resourceBundle.getString("familyCount") + " : " + user.getFamilyCount(), font);
+        Paragraph familyCount = new Paragraph( resourceBundle.getString("familyCount") + " :  " + user.getFamilyCount(), font);
         familyCount.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph AddressCount = new Paragraph( resourceBundle.getString("HomeAddress") + " :  " + user.getHomeAddress(), font);
+        AddressCount.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph preDate = new Paragraph( resourceBundle.getString("preDate") + " : " + (bill.getPreviousDate() != null ? DateUtil.getDateAsString(bill.getPreviousDate()) : ""), font);
+        Paragraph preDate = new Paragraph( resourceBundle.getString("preDate") + " :  " + (bill.getPreviousDate() != null ? DateUtil.getDateAsString(bill.getPreviousDate()) : ""), font);
         preDate.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph currentDate = new Paragraph( resourceBundle.getString("currentDate") + " : " + (bill.getNewDate() != null ? DateUtil.getDateAsString(bill.getNewDate()) : ""), font);
+        Paragraph currentDate = new Paragraph( resourceBundle.getString("currentDate") + " :  " + (bill.getNewDate() != null ? DateUtil.getDateAsString(bill.getNewDate()) : ""), font);
         currentDate.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph previousFigure = new Paragraph( resourceBundle.getString("preFigure") + " : " + bill.getPreviousFigure(), font);
+        Paragraph previousFigure = new Paragraph( resourceBundle.getString("preFigure") + " :  " + bill.getPreviousFigure(), font);
         previousFigure.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph currentFigure = new Paragraph( resourceBundle.getString("currentFigure") + " : " + bill.getCurrentFigure(), font);
+        Paragraph currentFigure = new Paragraph( resourceBundle.getString("currentFigure") + " :  " + bill.getCurrentFigure(), font);
         currentFigure.setAlignment(Element.ALIGN_RIGHT);
 
-        Paragraph cunsumption = new Paragraph( resourceBundle.getString("cunsumption") + " : " + bill.getCunsumption(), font);
+        Paragraph cunsumption = new Paragraph( resourceBundle.getString("cunsumption") + " :  " + bill.getCunsumption(), font);
         cunsumption.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph amount = new Paragraph( "          " + resourceBundle.getString("final_amount") , fontB);
+        amount.setAlignment(Element.ALIGN_CENTER);
+        
+        Paragraph amountValue = new Paragraph( "           " + bill.getFinalAmount().toString() , fontB);
+        amountValue.setAlignment(Element.ALIGN_CENTER);
+        
+        Paragraph expireDate = new Paragraph( "              " + resourceBundle.getString("expire_Date")  + " : ", font);
+        expireDate.setAlignment(Element.ALIGN_CENTER);
+        
+        Paragraph expireDateValue = new Paragraph( "  " + resourceBundle.getString("expire_Date_value") , font);
+        expireDateValue.setAlignment(Element.ALIGN_CENTER);
+        
+        Paragraph cost_water = new Paragraph( "     " + resourceBundle.getString("masraf_per_family") + " : " + bill.getCostWater(), font);
+        cost_water.setAlignment(Element.ALIGN_CENTER);
+        
+        Paragraph abonman = new Paragraph( "          " + resourceBundle.getString("abonman") + " : " + bill.getAbonman(), font);
+        abonman.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph services = new Paragraph(  "          " + resourceBundle.getString("services") + " : " + bill.getServices(), font);
+        services.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph cost_balance = new Paragraph(  "          " + resourceBundle.getString("cost_balance") + " : " + bill.getCostBalance(), font);
+        cost_balance.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph reduction = new Paragraph(  "          " + resourceBundle.getString("reduction") + " : " + bill.getReduction(), font);
+        reduction.setAlignment(Element.ALIGN_RIGHT);
+        
+        Paragraph bedehi = new Paragraph( "          " + resourceBundle.getString("last_bedehi") + " : " + 0, font);
+        bedehi.setAlignment(Element.ALIGN_RIGHT);
 
+        Paragraph bestankari = new Paragraph( "          " + resourceBundle.getString("bestankar") + " : " + 0, font);
+        bestankari.setAlignment(Element.ALIGN_RIGHT);
+
+        if (acc) {
+            if (accEntity.getAccountBalance() >= 0) {
+                bedehi = new Paragraph( "          " + resourceBundle.getString("last_bedehi") + " : " + accEntity.getAccountBalance(), font);
+                bedehi.setAlignment(Element.ALIGN_RIGHT);
+            } else {
+                bestankari = new Paragraph( "          " + resourceBundle.getString("bestankar") + " : " + abs(accEntity.getAccountBalance()), font);
+                bestankari.setAlignment(Element.ALIGN_RIGHT);
+            }
+        }
 
 
         PdfPCell customerNumberCell = new PdfPCell(customerNumber);
@@ -101,6 +157,11 @@ public class PdfUtil {
         familyCountCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         familyCountCell.setBorder(0);
         familyCountCell.setMinimumHeight(25);
+        
+        PdfPCell addressCountCell = new PdfPCell(AddressCount);
+        addressCountCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        addressCountCell.setBorder(0);
+        addressCountCell.setMinimumHeight(40);
 
         PdfPCell preDateCell = new PdfPCell(preDate);
         preDateCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
@@ -126,15 +187,95 @@ public class PdfUtil {
         cunsumptionCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         cunsumptionCell.setBorder(0);
         cunsumptionCell.setMinimumHeight(25);
+        
+        PdfPCell amountCell = new PdfPCell(amount);
+        amountCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        amountCell.setBorder(0);
+        amountCell.setMinimumHeight(25);
+        
+        PdfPCell amountValueCell = new PdfPCell(amountValue);
+        amountValueCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        amountValueCell.setBorder(0);
+        amountValueCell.setMinimumHeight(25);
+        
+        PdfPCell expireDateCell = new PdfPCell(expireDate);
+        expireDateCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        expireDateCell.setBorder(0);
+        expireDateCell.setMinimumHeight(25);
+        
+        PdfPCell expireDateValueCell = new PdfPCell(expireDateValue);
+        expireDateValueCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        expireDateValueCell.setBorder(0);
+        expireDateValueCell.setMinimumHeight(25);
+        
+        PdfPCell costWaterCell = new PdfPCell(cost_water);
+        costWaterCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        costWaterCell.setBorder(0);
+        costWaterCell.setMinimumHeight(25);
+        
+        PdfPCell abonmanCell = new PdfPCell(abonman);
+        abonmanCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        abonmanCell.setBorder(0);
+        abonmanCell.setMinimumHeight(25);
+        
+        PdfPCell servicesCell = new PdfPCell(services);
+        servicesCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        servicesCell.setBorder(0);
+        servicesCell.setMinimumHeight(25);
+        
+        PdfPCell costBalanceCell = new PdfPCell(cost_balance);
+        costBalanceCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        costBalanceCell.setBorder(0);
+        costBalanceCell.setMinimumHeight(25);
+        
+        PdfPCell reductionCell = new PdfPCell(reduction);
+        reductionCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        reductionCell.setBorder(0);
+        reductionCell.setMinimumHeight(25);
+        
+        PdfPCell bedehkariCell = new PdfPCell(bedehi);
+        bedehkariCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        bedehkariCell.setBorder(0);
+        bedehkariCell.setMinimumHeight(25);
+        
+        PdfPCell bestankariCell = new PdfPCell(bestankari);
+        bestankariCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        bestankariCell.setBorder(0);
+        bestankariCell.setMinimumHeight(25);
+        
+        PdfPCell emptyCell = new PdfPCell(new Phrase(""));
+        emptyCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        emptyCell.setBorder(0);
+        emptyCell.setMinimumHeight(15);
 
         table.addCell(customerNumberCell);
+        table.addCell(emptyCell);
+        table.addCell(abonmanCell);
         table.addCell(customerNameCell);
+        table.addCell(emptyCell);
+        table.addCell(bedehkariCell);
         table.addCell(familyCountCell);
+        table.addCell(emptyCell);
+        table.addCell(servicesCell); 
+        table.addCell(addressCountCell);
+        table.addCell(emptyCell);
+        table.addCell(costBalanceCell);
         table.addCell(preDateCell);
+        table.addCell(emptyCell);
+        table.addCell(costWaterCell);
         table.addCell(currentDateCell);
+        table.addCell(amountCell);
+        table.addCell(emptyCell);
         table.addCell(previousFigureCell);
+        table.addCell(amountValueCell);
+        table.addCell(emptyCell);
         table.addCell(currentFigureCell);
+        table.addCell(expireDateCell);
+        table.addCell(reductionCell);
         table.addCell(cunsumptionCell);
+        table.addCell(expireDateValueCell);
+        table.addCell(bestankariCell); 
+        
         document.add(table);
 
 

@@ -165,8 +165,8 @@ public class EditBillController extends BaseController {
             costBalance = Integer.parseInt(this.cost_balance.getText());    
         if(!this.preFigure.getText().equals(""))
             preFigure = Integer.parseInt(this.preFigure.getText());
-        if(!this.currentFigure.getText().equals(""))
-            currentFigure =Integer.parseInt(this.currentFigure.getText());
+//        if(!this.currentFigure.getText().equals(""))
+//            currentFigure =Integer.parseInt(this.currentFigure.getText());
         if(!this.familyCnt.getText().equals(""))
              familyCnt = Integer.parseInt(this.familyCnt.getText());
         
@@ -200,15 +200,24 @@ public class EditBillController extends BaseController {
             alert.showAndWait();
             return;
         }
-        if (currentFigure == null) {
+        if (this.currentFigure.getText().equals("")) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(messageTitle);
             alert.setHeaderText(null);
             alert.setContentText(resourceBundle.getString("currentFigure_is_null"));
             alert.showAndWait();
-            return ;
+            return;
         }
-
+        else if (!this.currentFigure.getText().matches("[0-9]+")) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(messageTitle);
+            alert.setHeaderText(null);
+            alert.setContentText(resourceBundle.getString("currentFigure_must_be_num"));
+            alert.showAndWait();
+            return;
+        }else
+            currentFigure =Integer.parseInt(this.currentFigure.getText());
+        
         if (this.services.getText() == null || this.services.getText().equals("")) {
             servicesInt = 0;
             services.setText("0");
@@ -303,7 +312,7 @@ public class EditBillController extends BaseController {
 //                    stage.close();
 //                }
                 refreshView(BillManagementController.class);
-                refreshView(UserManagementController.class);
+//                refreshView(UserManagementController.class);
                 alert = new Alert(Alert.AlertType.INFORMATION);
             } catch (DatabaseOperationException e) {
                 e.printStackTrace();
