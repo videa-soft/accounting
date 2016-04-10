@@ -41,6 +41,7 @@ CREATE TABLE BILL (
   cost_water DOUBLE,
   cost_balance INT,
   final_amount INT,
+  last_debit INT,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES USER(user_id)
 );

@@ -124,6 +124,8 @@ public class EditBillController extends BaseController {
                 if(maxAccRecord.size() > 0){
                     preBedehi.setText(maxAccRecord.get(0).getAccountBalance().toString());
                 }
+                else
+                     preBedehi.setText("0");
             }
         } catch (DatabaseOperationException e) {
             showOperationError();
@@ -301,6 +303,7 @@ public class EditBillController extends BaseController {
             bill.setCostWater(costWater);
             bill.setCostBalance(costBalance);
             bill.setFinalAmount(finalamount);
+            bill.setLastDebit(preBedehi);
            
             try {
                 Integer primaryKey = DatabaseUtil.getValidPrimaryKey(bill);
@@ -347,7 +350,10 @@ public class EditBillController extends BaseController {
             alert.showAndWait();
         } else {
             try {
-                String fileName = PropUtil.getString("bill.report.base.path") +bill.getUserId()+ ".pdf";
+                Bill billCount = new Bill();
+                billCount.setUserId(bill.getUserId());
+                DatabaseUtil.getCount(bill);
+                String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + bill.getUserId() + "_" + DatabaseUtil.getCount(billCount) + "_.pdf";
                 PdfUtil.createBillPdf(bill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -368,6 +374,10 @@ public class EditBillController extends BaseController {
                 alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
                 alert.showAndWait();
                 log.error(e.getMessage());
+            } catch (DatabaseOperationException e) {
+                log.error(e.getMessage());
+            } catch (DeveloperFaultException e) {
+                e.printStackTrace();
             }
         }
     }
