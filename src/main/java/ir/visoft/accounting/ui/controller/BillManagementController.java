@@ -105,6 +105,7 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
+
                 PdfUtil.createBillPdf(selectedBill, fileName);
 //                new java.util.Timer().schedule(
 //                        new java.util.TimerTask() {
@@ -147,6 +148,7 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
+
                 PdfUtil.createBillPdf(selectedBill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {

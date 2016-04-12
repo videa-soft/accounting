@@ -56,6 +56,7 @@ public class PdfUtil {
         BaseFont baseFont = null;
         try {
             baseFont = BaseFont.createFont("/fonts/BNazanin.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,12 +140,16 @@ public class PdfUtil {
         PdfPCell customerNumberCell = new PdfPCell(customerNumber);
         customerNumberCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         customerNumberCell.setBorder(0);
+
         customerNumberCell.setMinimumHeight(20);
+
 
         PdfPCell customerNameCell = new PdfPCell(customerName);
         customerNameCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         customerNameCell.setBorder(0);
+
         customerNameCell.setMinimumHeight(20);
+
 
         PdfPCell familyCountCell = new PdfPCell(familyCount);
         familyCountCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
