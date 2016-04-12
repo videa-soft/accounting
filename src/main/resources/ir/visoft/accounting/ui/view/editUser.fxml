@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import com.sun.javafx.scene.control.skin.InputField?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -9,26 +8,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="558.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.EditUserController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="558.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.EditUserController">
   <children>
-    <GridPane layoutX="42.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="491.0">
+    <GridPane layoutX="34.0" layoutY="49.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="491.0">
       <children>
-        <TextField fx:id="username" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="firstName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="lastName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="nationalCode" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextArea fx:id="homeAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="familyCnt" alignment="CENTER_RIGHT" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextArea fx:id="workAddress" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-        <TextField fx:id="phoneNumber" alignment="CENTER_RIGHT" prefWidth="295.0" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <Label text="%username" GridPane.columnIndex="1" />
-        <Label text="%firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="%lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Label text="%nationalCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="%HomeAddress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label text="%familyCount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Label text="%workAddress" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Label text="%phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="firstName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="lastName" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="nationalCode" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="homeAddress" alignment="CENTER_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="familyCnt" alignment="CENTER_RIGHT" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="phoneNumber" alignment="CENTER_RIGHT" prefWidth="295.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="%firstName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="%lastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="%nationalCode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="%HomeAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="%familyCount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="%phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       </children>
       <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="308.0" />
@@ -40,11 +35,11 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button layoutX="282.0" layoutY="422.0" mnemonicParsing="false" onAction="#save" text="%Save" />
+    <Button layoutX="282.0" layoutY="362.0" mnemonicParsing="false" onAction="#save" text="%Save" />
   </children>
 </Pane>
