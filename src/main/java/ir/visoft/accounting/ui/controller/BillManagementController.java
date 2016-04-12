@@ -40,6 +40,11 @@ public class BillManagementController extends BaseController {
         setBillTableData();
     }
     
+     @Override
+    public void refresh() {
+        setBillTableData();
+    }
+    
      private void setBillTableData() {
         List<Bill> Bill = null;
         try {
@@ -61,7 +66,7 @@ public class BillManagementController extends BaseController {
             TableColumn currentFigureColumn = new TableColumn(resourceBundle.getString("currentFigure"));
             currentFigureColumn.setCellValueFactory(new PropertyValueFactory("currentFigure"));
 
-            TableColumn cunsumptionColumn = new TableColumn(resourceBundle.getString("cunsumption"));
+            TableColumn cunsumptionColumn = new TableColumn(resourceBundle.getString("cunsumption_short"));
             cunsumptionColumn.setCellValueFactory(new PropertyValueFactory("cunsumption"));
 
             TableColumn abonmanColumn = new TableColumn(resourceBundle.getString("abonman"));
@@ -73,8 +78,11 @@ public class BillManagementController extends BaseController {
             TableColumn servicesColumn = new TableColumn(resourceBundle.getString("services"));
             servicesColumn.setCellValueFactory(new PropertyValueFactory("services"));
             
-            TableColumn costWaterColumn = new TableColumn(resourceBundle.getString("cost_water"));
+            TableColumn costWaterColumn = new TableColumn(resourceBundle.getString("masraf_per_family"));
             costWaterColumn.setCellValueFactory(new PropertyValueFactory("costWater"));
+            
+            TableColumn lastDebitColumn = new TableColumn(resourceBundle.getString("last_bedehi"));
+            lastDebitColumn.setCellValueFactory(new PropertyValueFactory("lastDebit"));
             
             TableColumn costBalanceColumn = new TableColumn(resourceBundle.getString("cost_balance"));
             costBalanceColumn.setCellValueFactory(new PropertyValueFactory("costBalance"));
@@ -84,7 +92,7 @@ public class BillManagementController extends BaseController {
 
             billTable.getItems().removeAll();
             billTable.getColumns().clear();
-            billTable.getColumns().addAll(userIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn,costBalanceColumn, finalAmountColumn);
+            billTable.getColumns().addAll(userIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn,lastDebitColumn, costBalanceColumn, finalAmountColumn);
             billTable.setItems(FXCollections.observableList(Bill));
         } catch (DatabaseOperationException e) {
             showOperationError();
@@ -97,6 +105,7 @@ public class BillManagementController extends BaseController {
         Alert alert;
         if(selectedBill == null) {
             alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(resourceBundle.getString("error"));
             alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
             alert.showAndWait();
         } else {
@@ -105,21 +114,8 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
-                PdfUtil.createBillPdf(selectedBill, fileName);
-//                new java.util.Timer().schedule(
-//                        new java.util.TimerTask() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    FileUtil.openFile(fileName);
-//                                } catch (IOException e) {
-//                                    log.error(e.getMessage());
-//                                }
-//                            }
-//                        },
-//                        1000
-//                );
 
+                PdfUtil.createBillPdf(selectedBill, fileName);
             } catch (DocumentException | IOException e) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
@@ -139,6 +135,7 @@ public class BillManagementController extends BaseController {
         Alert alert;
         if(selectedBill == null) {
             alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(resourceBundle.getString("error"));
             alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
             alert.showAndWait();
         } else {
@@ -147,6 +144,7 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
+
                 PdfUtil.createBillPdf(selectedBill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {

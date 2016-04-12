@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.net.URL?>
@@ -8,15 +7,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="1115.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.UserManagementController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="514.0" prefWidth="1170.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ir.visoft.accounting.ui.controller.UserManagementController">
   <children>
-
-    <TableView fx:id="usersTable" editable="true" layoutX="43.0" layoutY="71.0" prefHeight="430.0" prefWidth="1033.0" tableMenuButtonVisible="true" />
-    <Button layoutX="913.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditUser" text="%EditUser" />
-    <Button layoutX="813.0" layoutY="23.0" mnemonicParsing="false" onAction="#onRemoveUser" text="%RemoveUser" />
-    <Button layoutX="577.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditBill" text="%EditBill" />
-    <Button layoutX="705.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="%AddUser" />
-    <Button layoutX="401.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditAccunt" text="%EditAccount" />
+    <TableView fx:id="usersTable" editable="true" layoutX="43.0" layoutY="71.0" prefHeight="430.0" prefWidth="1102.0" tableMenuButtonVisible="true" />
+    <Button layoutX="944.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditUser" text="%EditUser" />
+    <Button layoutX="837.0" layoutY="23.0" mnemonicParsing="false" onAction="#onRemoveUser" text="%RemoveUser" />
+    <Button layoutX="479.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditBill" text="%EditBill" />
+    <Button layoutX="722.0" layoutY="23.0" mnemonicParsing="false" onAction="#onAddUser" text="%AddUser" />
+    <Button layoutX="329.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditLastBill" text="%EditLastBill" />
+    <Button layoutX="185.0" layoutY="23.0" mnemonicParsing="false" onAction="#onDeleteLastBill" text="%DeleteLastBill" />
+    <Button focusTraversable="true" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#onEditAccunt" text="%EditAccount" visible="false" />
   </children>
 </AnchorPane>
-

@@ -27,7 +27,7 @@ public class Bill extends BaseEntity {
     @EntityField
     private Integer cunsumption;
     @EntityField
-    private Double abonman;
+    private Integer abonman;
     @EntityField
     private Integer reduction;
     @EntityField
@@ -44,7 +44,7 @@ public class Bill extends BaseEntity {
     private Integer lastDebit;
 
 
-    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Double abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId, Integer lastDebit) {
+    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Integer abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId, Integer lastDebit) {
 
         this.billId = billId;
         this.previousDate = preDate;
@@ -121,11 +121,11 @@ public class Bill extends BaseEntity {
         this.cunsumption = cunsumption;
     }
 
-    public Double getAbonman() {
+    public Integer getAbonman() {
         return abonman;
     }
 
-    public void setAbonman(Double abonman) {
+    public void setAbonman(Integer abonman) {
         this.abonman = abonman;
     }
 

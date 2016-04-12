@@ -24,8 +24,8 @@ public class EditUserController extends BaseController {
 
 
     private User selectedUser;
-    @FXML
-    private TextField username;
+//    @FXML
+//    private TextField username;
     @FXML
     private TextField firstName;
     @FXML
@@ -33,11 +33,11 @@ public class EditUserController extends BaseController {
     @FXML
     private TextField nationalCode;
     @FXML
-    private TextArea homeAddress;
+    private TextField homeAddress;
     @FXML
     private TextField familyCnt;
-    @FXML
-    private TextArea workAddress;
+//    @FXML
+//    private TextArea workAddress;
     @FXML
     private TextField phoneNumber;
 
@@ -46,15 +46,14 @@ public class EditUserController extends BaseController {
     @Override
     public void init(Object data) {
         selectedUser = (User)data;
-//        nationalCode.addEventFilter(EventType., this);
         if(selectedUser != null) {
-            username.setText(selectedUser.getUsername());
+//            username.setText(selectedUser.getUsername());
             firstName.setText(selectedUser.getFirstName());
             lastName.setText(selectedUser.getLastName());
             nationalCode.setText(selectedUser.getNationalCode());
             homeAddress.setText(selectedUser.getHomeAddress());
             familyCnt.setText(selectedUser.getFamilyCount().toString());
-            workAddress.setText(selectedUser.getWorkAddress());
+//            workAddress.setText(selectedUser.getWorkAddress());
             phoneNumber.setText(selectedUser.getPhoneNumber());
         }
     }
@@ -66,22 +65,34 @@ public class EditUserController extends BaseController {
         String messageContent = "";
         boolean validate = true;
         
-        String username = this.username.getText();
+//        String username = this.username.getText();
         String firstName = this.firstName.getText();
         String lastName = this.lastName.getText();
         String nationalCode = this.nationalCode.getText();
-        String homeAddress = this.homeAddress.getText();
-        String workAddress = this.workAddress.getText();
-        String phoneNumber = this.phoneNumber.getText();
+        String homeAddress = null ;
+        String workAddress = null ;
+        String phoneNumber = null ;
         Integer familyCnt = null;
+        if(this.homeAddress.getText().equals("")){
+            homeAddress = null ;
+            this.homeAddress.setText("");
+        }else
+            homeAddress = this.homeAddress.getText();
         
-        if(username == null || username.equals("")) {
-            messageTitle = "";
-            messageHeader = resourceBundle.getString("usename_is_null").toString();
-            messageContent = "";
-            validate = false;
-
-        } else if(firstName == null || firstName.equals("")) {
+//        if(this.workAddress.getText().equals("")){
+//            workAddress = null;
+//            this.workAddress.setText("");
+//        }else
+//            workAddress = this.workAddress.getText();
+        
+        if( this.phoneNumber.getText().equals("")){
+            phoneNumber = null;
+            this.phoneNumber.setText("");
+        }else
+            phoneNumber = this.phoneNumber.getText();
+        
+        
+        if(firstName == null || firstName.equals("")) {
             messageTitle = "";
 
             messageHeader = resourceBundle.getString("firstname_is_null").toString();
@@ -131,18 +142,20 @@ public class EditUserController extends BaseController {
             messageHeader = resourceBundle.getString("phoneNum_must_be_num").toString();
             messageContent = "";
             validate = false;
-        } else {
+        } 
+        
+        if (validate) {
             //check to see if any user with this userId exists!
             List<User> userList = null;
             try {
-                userList = DatabaseUtil.getEntity(new User(username));
+                userList = DatabaseUtil.getEntity(new User(nationalCode));
             } catch (DatabaseOperationException e) {
                 messageTitle = "";
                 messageHeader = resourceBundle.getString("operation_system_exception").toString();
                 messageContent = resourceBundle.getString("error_in_sys_operation").toString();
                 validate = false;
             }
-            if(userList != null && !userList.isEmpty() && userList.size() == 1) {
+            if (userList != null && !userList.isEmpty() && userList.size() == 1) {
                 if (!userList.get(0).getUserId().equals(selectedUser.getUserId())) {
                     messageTitle = "";
                     messageHeader = resourceBundle.getString("Username_already_exists").toString();
@@ -159,7 +172,7 @@ public class EditUserController extends BaseController {
             if(selectedUser != null) {
                 user.setUserId(selectedUser.getUserId());
             }
-            user.setUsername(username);
+            user.setUsername("");
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setNationalCode(nationalCode);
