@@ -29,14 +29,18 @@ public class AccBalanceManagementController extends BaseController {
     public void initialize() {
         setAccTableData();
     }
-    
-    
-     private void setAccTableData() {
+
+    @Override
+    public void refresh() {
+        setAccTableData();
+    }
+
+    private void setAccTableData() {
         List<AccountBalance> Acc = null;
         try {
-                            
+
             Acc = DatabaseUtil.getAll(new AccountBalance());
-            
+
             TableColumn userIdColumn = new TableColumn(resourceBundle.getString("userId"));
             userIdColumn.setCellValueFactory(new PropertyValueFactory("userId"));
 
@@ -54,14 +58,13 @@ public class AccBalanceManagementController extends BaseController {
 
             TableColumn accountBalanceColumn = new TableColumn(resourceBundle.getString("accountBalance"));
             accountBalanceColumn.setCellValueFactory(new PropertyValueFactory("accountBalance"));
-            
+
             TableColumn descriptionColumn = new TableColumn(resourceBundle.getString("description"));
             descriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
 
-           
             accBalanceTable.getItems().removeAll();
             accBalanceTable.getColumns().clear();
-            accBalanceTable.getColumns().addAll(userIdColumn , accIdColumn, createDateColumn , debitColumn, creditColumn , accountBalanceColumn , descriptionColumn);
+            accBalanceTable.getColumns().addAll(userIdColumn, accIdColumn, createDateColumn, debitColumn, creditColumn, accountBalanceColumn, descriptionColumn);
             accBalanceTable.setItems(FXCollections.observableList(Acc));
         } catch (DatabaseOperationException e) {
             showOperationError();

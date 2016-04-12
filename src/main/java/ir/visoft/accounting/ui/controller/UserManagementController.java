@@ -1,6 +1,7 @@
 package ir.visoft.accounting.ui.controller;
 
 import ir.visoft.accounting.db.DatabaseUtil;
+import ir.visoft.accounting.entity.Bill;
 import ir.visoft.accounting.entity.User;
 import ir.visoft.accounting.exception.DatabaseOperationException;
 import ir.visoft.accounting.ui.ApplicationContext;
@@ -121,7 +122,6 @@ public class UserManagementController extends  BaseController {
                     alertError.setHeaderText("");
                     alertError.setContentText(resourceBundle.getString("cannot_delete_for_dependency"));
                     alertError.showAndWait();
-//                    showOperationError();
                 }
             }
         }
@@ -174,9 +174,9 @@ public class UserManagementController extends  BaseController {
             showEditBillDialog();
         }
     }
-    
-     private void showEditBillDialog() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editBill.fxml") ,resourceBundle);
+
+    private void showEditBillDialog() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editBill.fxml"), resourceBundle);
         Pane page = null;
         EditBillController controller = null;
         try {
@@ -202,7 +202,7 @@ public class UserManagementController extends  BaseController {
         dialogStage.setScene(scene);
         dialogStage.showAndWait();
     }
-     
+
     @FXML
     private void onEditAccunt(ActionEvent event) {
         selectedUser = usersTable.getSelectionModel().getSelectedItem();
@@ -210,9 +210,9 @@ public class UserManagementController extends  BaseController {
             showEditAccDialog();
         }
     }
-    
-         private void showEditAccDialog() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editAccount.fxml") , resourceBundle);
+
+    private void showEditAccDialog() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editAccount.fxml"), resourceBundle);
         Pane page = null;
         EditAccountController controller = null;
         try {
@@ -224,7 +224,7 @@ public class UserManagementController extends  BaseController {
             log.error(e.getMessage());
         }
 
-         //Create the dialog Stage.
+        //Create the dialog Stage.
         Stage dialogStage = new Stage();
         dialogStage.setTitle(resourceBundle.getString("EditAccount"));
         dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -239,19 +239,95 @@ public class UserManagementController extends  BaseController {
         dialogStage.showAndWait();
     }
 
-     
-     private boolean chkNullUser(Object selectedUser){
+    @FXML
+    private void onEditLastBill(ActionEvent event) {
+        selectedUser = usersTable.getSelectionModel().getSelectedItem();
+
+        if(chkNullUser(selectedUser)) {
+            showEditLastBillDialog();
+        }
+    }
+    
+    private void showEditLastBillDialog(){
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_BASE_URL + "editBill.fxml"), resourceBundle);
+        Pane page = null;
+        EditBillController controller = null;
+        try {
+            page = loader.load();
+            controller = loader.<EditBillController>getController();
+            ApplicationContext.addController(controller);
+            controller.initEditLastBill(selectedUser);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(resourceBundle.getString("EditLastBill"));
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        Scene scene = null;
+        if (page != null) {
+            scene = new Scene(page);
+        }
+        if (controller != null) {
+            controller.setStage(dialogStage);
+        }
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
+        
+    }
+
+    @FXML
+    private void onDeleteLastBill(ActionEvent event) {
+        selectedUser = usersTable.getSelectionModel().getSelectedItem();
+        if (chkNullUser(selectedUser)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle(resourceBundle.getString("Confirmation_Dialog"));
+            alert.setHeaderText(resourceBundle.getString("deleteBill"));
+            alert.setContentText(resourceBundle.getString("are_you_sure"));
+
+            Optional<ButtonType> result = alert.showAndWait();
+            List<Bill> billList = null;
+            if (result.get() == ButtonType.OK) {
+                try {
+                    billList = DatabaseUtil.getEntity(new Bill(selectedUser.getUserId()));
+                    Integer maxBill = 0;
+                    for (Bill bills : billList) {
+                        if (maxBill < bills.getBillId()) {
+                            maxBill = bills.getBillId();
+                        }
+                    }
+                    List<Bill> maxBillRecord = DatabaseUtil.getEntity(new Bill(selectedUser.getUserId(), maxBill));
+                    DatabaseUtil.delete(maxBillRecord.get(0));
+                    refreshView(BillManagementController.class);
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText("");
+                    alert.setContentText(resourceBundle.getString("Last_Bill_Delete_Successfully"));
+                    alert.showAndWait();
+                } catch (DatabaseOperationException e) {
+                    Alert alertError = new Alert(Alert.AlertType.ERROR);
+                    alertError.setTitle(resourceBundle.getString("error"));
+                    alertError.setHeaderText("");
+                    alertError.setContentText(resourceBundle.getString("cannot_delete_for_dependency"));
+                    alertError.showAndWait();
+                }
+            }
+        }
+    }
+
+    private boolean chkNullUser(Object selectedUser) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(selectedUser == null){
-              alert.setTitle(resourceBundle.getString("error"));
-              alert.setHeaderText("");
-              alert.setContentText(resourceBundle.getString("not_selected_any_user"));
-              alert.showAndWait();
-              return false;
-         }
-        else
+        if (selectedUser == null) {
+            alert.setTitle(resourceBundle.getString("error"));
+            alert.setHeaderText("");
+            alert.setContentText(resourceBundle.getString("not_selected_any_user"));
+            alert.showAndWait();
+            return false;
+        } else {
             return true;
-     }
- 
+        }
+    }
 
 }

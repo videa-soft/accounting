@@ -40,7 +40,7 @@
         <Label text="%customerNumber" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="%currentFigure" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="%preBedehi" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <TextField fx:id="preBedehi" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+        <TextField fx:id="preDebit" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
       </children>
       <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />

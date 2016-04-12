@@ -40,6 +40,11 @@ public class BillManagementController extends BaseController {
         setBillTableData();
     }
     
+     @Override
+    public void refresh() {
+        setBillTableData();
+    }
+    
      private void setBillTableData() {
         List<Bill> Bill = null;
         try {
@@ -97,6 +102,7 @@ public class BillManagementController extends BaseController {
         Alert alert;
         if(selectedBill == null) {
             alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(resourceBundle.getString("error"));
             alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
             alert.showAndWait();
         } else {
@@ -105,21 +111,8 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
-                PdfUtil.createBillPdf(selectedBill, fileName);
-//                new java.util.Timer().schedule(
-//                        new java.util.TimerTask() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    FileUtil.openFile(fileName);
-//                                } catch (IOException e) {
-//                                    log.error(e.getMessage());
-//                                }
-//                            }
-//                        },
-//                        1000
-//                );
 
+                PdfUtil.createBillPdf(selectedBill, fileName);
             } catch (DocumentException | IOException e) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText(resourceBundle.getString("error_in_sys_operation"));
@@ -139,6 +132,7 @@ public class BillManagementController extends BaseController {
         Alert alert;
         if(selectedBill == null) {
             alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(resourceBundle.getString("error"));
             alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
             alert.showAndWait();
         } else {
@@ -147,6 +141,7 @@ public class BillManagementController extends BaseController {
                 bill.setUserId(selectedBill.getUserId());
                 DatabaseUtil.getCount(bill);
                 String fileName = PropUtil.getString("bill.report.base.path") + "bill_" + selectedBill.getUserId() + "_" + DatabaseUtil.getCount(bill) + "_.pdf";
+
                 PdfUtil.createBillPdf(selectedBill, fileName);
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
