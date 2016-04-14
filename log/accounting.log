@@ -151,3 +151,93 @@
 2016-04-14 18:29:16 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
 2016-04-14 20:21:45 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
 >>>>>>> FINAL
+2016-04-14 22:52:36 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:52:36 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:53:01 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:53:01 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:53:02 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:53:02 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:53:02 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:53:02 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:53:02 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:53:02 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:53:02 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:53:02 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:54:04 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:54:04 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:12 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:12 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:17 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:17 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:17 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:17 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:17 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:17 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:17 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:17 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+2016-04-14 22:56:18 ERROR BaseEntity:116 - 
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
+/F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
+
+2016-04-14 22:56:18 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
