@@ -199,7 +199,7 @@ public class PdfUtil {
         expireDateCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         expireDateCell.setBorder(0);
         expireDateCell.setMinimumHeight(20);
-        
+
         PdfPCell expireDateValueCell = new PdfPCell(expireDateValue);
         expireDateValueCell.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
         expireDateValueCell.setBorder(0);

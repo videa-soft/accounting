@@ -133,6 +133,7 @@ public class BillManagementController extends BaseController {
         Alert alert;
         if(selectedBill == null) {
             alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(resourceBundle.getString("error"));
             alert.setContentText(resourceBundle.getString("selected_bill_is_null"));
             alert.showAndWait();
         } else {

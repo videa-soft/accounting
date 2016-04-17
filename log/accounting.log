@@ -10,6 +10,7 @@
 2016-04-08 20:53:55 ERROR BillManagementController:130 - C:\Users\Amir\Desktop\bill\bill_100_4_.pdf (The system cannot find the path specified)
 2016-04-08 20:55:19 ERROR BillManagementController:130 - C:\Users\Amir\Desktop\bill\bill_100_4_.pdf (The system cannot find the path specified)
 <<<<<<< HEAD
+<<<<<<< HEAD
 2016-04-10 22:04:47 ERROR BaseEntity:163 - 
 2016-04-10 23:03:13 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
 2016-04-10 23:03:37 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
@@ -57,6 +58,8 @@
 2016-04-11 23:08:45 ERROR BaseEntity:163 - 
 2016-04-11 23:32:12 ERROR BaseEntity:163 - 
 =======
+=======
+>>>>>>> FINAL
 2016-04-14 17:27:50 ERROR BaseEntity:116 - Error resolving onAction='#onDeleteLastBill', either the event handler is not in the Namespace or there is an error in the script.
 /F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/userManagement.fxml:19
 /F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:16
@@ -150,6 +153,7 @@
 2016-04-14 18:19:48 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
 2016-04-14 18:29:16 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
 2016-04-14 20:21:45 ERROR Database:38 - Database may be already in use: null. Possible solutions: close all other connection(s); use the server mode [90020-191]
+<<<<<<< HEAD
 >>>>>>> FINAL
 2016-04-14 22:52:36 ERROR BaseEntity:116 - 
 /F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/billManagement.fxml
@@ -256,3 +260,5 @@
 /F:/repo/accounting/target/classes/ir/visoft/accounting/ui/view/main.fxml:21
 
 2016-04-14 22:59:52 ERROR BaseEntity:122 - Root element is null on setting: main.fxml
+=======
+>>>>>>> FINAL

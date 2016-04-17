@@ -14936,7 +14936,10 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:F:/repo/acco
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:342)
 	... 23 more
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> FINAL
 2016-04-14 18:25:17 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE BILL
 SET LAST_DEBIT 0[*] "; expected "., ="; SQL statement:
@@ -15380,5 +15383,8 @@ add abonman INT [42121-191]
 	at org.h2.server.web.WebThread.process(WebThread.java:164)
 	at org.h2.server.web.WebThread.run(WebThread.java:89)
 	at java.lang.Thread.run(Unknown Source)
+<<<<<<< HEAD
 >>>>>>> FINAL
 >>>>>>> Jalali and gregorian 2way conversion.
+=======
+>>>>>>> FINAL
