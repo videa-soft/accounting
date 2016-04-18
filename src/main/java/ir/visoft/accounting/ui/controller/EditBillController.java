@@ -147,6 +147,7 @@ public class EditBillController extends BaseController {
                     preDate.setText(maxBillRecord.get(0).getNewDate().toString());
                     preFigure.setText(maxBillRecord.get(0).getCurrentFigure().toString());
                     cost_balance.setText(maxBillRecord.get(0).getReduction().toString());
+                    preDebit.setText(maxBillRecord.get(0).getFinalAmount().toString());
                 }
 
                 customerNumber.setText(selectedUser.getCustomerNumber().toString());
@@ -164,19 +165,19 @@ public class EditBillController extends BaseController {
                     preFigure.setDisable(true);
                 }
 
-                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
-                Integer maxAcc = 0;
-                for (AccountBalance account : accList) {
-                    if (maxAcc < account.getAccId()) {
-                        maxAcc = account.getAccId();
-                    }
-                }
-                List<AccountBalance> maxAccRecord = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId(), maxAcc));
-                if (maxAccRecord.size() > 0) {
-                    preDebit.setText(maxAccRecord.get(0).getAccountBalance().toString());
-                } else {
-                    preDebit.setText("0");
-                }
+//                accList = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId()));
+//                Integer maxAcc = 0;
+//                for (AccountBalance account : accList) {
+//                    if (maxAcc < account.getAccId()) {
+//                        maxAcc = account.getAccId();
+//                    }
+//                }
+//                List<AccountBalance> maxAccRecord = DatabaseUtil.getEntity(new AccountBalance(selectedUser.getUserId(), maxAcc));
+//                if (maxAccRecord.size() > 0) {
+//                    preDebit.setText(maxAccRecord.get(0).getAccountBalance().toString());
+//                } else {
+//                    preDebit.setText("0");
+//                }
             }
         } catch (DatabaseOperationException e) {
             showOperationError();
@@ -324,13 +325,15 @@ public class EditBillController extends BaseController {
         /*------------------mohasebeye ghabli :
          Integer firstFig = Integer.parseInt(xInt.toString().substring(0, xInt.toString().length() - 1));
          Integer finalamount = (int)((familyCnt * b) * 1000 *(x - (5*firstFig))*(firstFig+1)); -----------------------*/
-        Integer finalamount = (int) ((familyCnt * b) * meter * (x - (5 * xInt)) * (xInt + 1));
-        finalamount = finalamount + servicesInt + costBalance + preDebit;
-        Integer reductionInt = finalamount % 1000;
-        finalamount = finalamount - reductionInt;
 
         Double abonmanD = Double.parseDouble(new DecimalFormat("######.##").format(b * perAbonman * familyCnt));
         Double costWater = Double.parseDouble(new DecimalFormat("##.##").format(x));
+        
+        Integer finalamount = (int) ((familyCnt * b) * meter * (x - (5 * xInt)) * (xInt + 1));
+        finalamount = finalamount + servicesInt + costBalance + preDebit + abonmanD.intValue();
+        Integer reductionInt = finalamount % 1000;
+        finalamount = finalamount - reductionInt;
+
 
         abonman.setText(String.valueOf(abonmanD.intValue()));
         cost_water.setText(costWater.toString());

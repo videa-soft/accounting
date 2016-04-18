@@ -66,7 +66,7 @@ public class BillManagementController extends BaseController {
             TableColumn currentFigureColumn = new TableColumn(resourceBundle.getString("currentFigure"));
             currentFigureColumn.setCellValueFactory(new PropertyValueFactory("currentFigure"));
 
-            TableColumn cunsumptionColumn = new TableColumn(resourceBundle.getString("cunsumption"));
+            TableColumn cunsumptionColumn = new TableColumn(resourceBundle.getString("cunsumption_short"));
             cunsumptionColumn.setCellValueFactory(new PropertyValueFactory("cunsumption"));
 
             TableColumn abonmanColumn = new TableColumn(resourceBundle.getString("abonman"));
@@ -78,8 +78,11 @@ public class BillManagementController extends BaseController {
             TableColumn servicesColumn = new TableColumn(resourceBundle.getString("services"));
             servicesColumn.setCellValueFactory(new PropertyValueFactory("services"));
             
-            TableColumn costWaterColumn = new TableColumn(resourceBundle.getString("cost_water"));
+            TableColumn costWaterColumn = new TableColumn(resourceBundle.getString("masraf_per_family"));
             costWaterColumn.setCellValueFactory(new PropertyValueFactory("costWater"));
+            
+            TableColumn lastDebitColumn = new TableColumn(resourceBundle.getString("last_bedehi"));
+            lastDebitColumn.setCellValueFactory(new PropertyValueFactory("lastDebit"));
             
             TableColumn costBalanceColumn = new TableColumn(resourceBundle.getString("cost_balance"));
             costBalanceColumn.setCellValueFactory(new PropertyValueFactory("costBalance"));
@@ -89,7 +92,7 @@ public class BillManagementController extends BaseController {
 
             billTable.getItems().removeAll();
             billTable.getColumns().clear();
-            billTable.getColumns().addAll(userIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn,costBalanceColumn, finalAmountColumn);
+            billTable.getColumns().addAll(userIdColumn, preDateColumn, currentDateColumn, preFigureColumn, currentFigureColumn, cunsumptionColumn, abonmanColumn,reductionColumn,servicesColumn, costWaterColumn,lastDebitColumn, costBalanceColumn, finalAmountColumn);
             billTable.setItems(FXCollections.observableList(Bill));
         } catch (DatabaseOperationException e) {
             showOperationError();

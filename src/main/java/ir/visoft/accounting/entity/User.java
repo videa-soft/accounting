@@ -46,8 +46,8 @@ public class User extends BaseEntity {
         this.familyCount = familyCount;
     }
 
-    public User(String username) {
-        this.username = username;
+    public User(String nationalCode) {
+        this.nationalCode = nationalCode;
     }
 
     public User(Integer userId) {

@@ -79,7 +79,7 @@ public class UserManagementController extends  BaseController {
 
             usersTable.getItems().removeAll();
             usersTable.getColumns().clear();
-            usersTable.getColumns().addAll(userIdColumn, custNumColumn, firstNameColumn, lastNameColumn, nationalCodeColumn, familyCntColumn, homeAddressColumn,workAddressColumn ,phoneNumberColumn);
+            usersTable.getColumns().addAll(userIdColumn, firstNameColumn, lastNameColumn, nationalCodeColumn, familyCntColumn, homeAddressColumn ,phoneNumberColumn);
 
             usersTable.setItems(FXCollections.observableList(users));
         } catch (DatabaseOperationException e) {

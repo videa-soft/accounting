@@ -21,9 +21,9 @@
             <fx:include fx:id="billManagementTab" source="billManagement.fxml" />
           </content>
         </Tab>
-        <Tab text="%accountBalanceTab">
+        <Tab disable="true" text="%accountBalanceTab">
           <content>
-            <fx:include fx:id="accBalanceManagementTab" source="accBalanceManagement.fxml"/>
+            <fx:include fx:id="accBalanceManagementTab" source="accBalanceManagement.fxml" />
           </content>
         </Tab>
       </tabs>

@@ -40,7 +40,7 @@
         <Label text="%customerNumber" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="%currentFigure" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="%preBedehi" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <TextField fx:id="preDebit" alignment="CENTER_RIGHT" disable="true" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+        <TextField fx:id="preDebit" alignment="CENTER_RIGHT" disable="false" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11" />
       </children>
       <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="295.0" />
@@ -64,6 +64,6 @@
       </rowConstraints>
     </GridPane>
     <Button fx:id="computationId" layoutX="210.0" layoutY="545.0" mnemonicParsing="false" onAction="#computationBtn" text="%computation" />
-    <Button fx:id="showBillId" disable="true" layoutX="399.0" layoutY="546.0" mnemonicParsing="false" onAction="#showBill"  text="%showBillPaper" />
+    <Button fx:id="showBillId" disable="true" layoutX="399.0" layoutY="546.0" mnemonicParsing="false" onAction="#showBill" text="%showBillPaper" />
   </children>
 </Pane>
