@@ -118,11 +118,13 @@ public class EditBillController extends BaseController {
                     cost_water.setText(maxBillRecord.get(0).getCostWater().toString());
                     cost_balance.setText(maxBillRecord.get(0).getCostBalance().toString());
                     final_amount.setText(maxBillRecord.get(0).getFinalAmount().toString());
+                    reduction.setText(maxBillRecord.get(0).getReduction().toString());
                     preDebit.setText(maxBillRecord.get(0).getLastDebit().toString());
                     setLastBillId(maxBillRecord.get(0).getBillId());
 
                 }
-                if (preDate.getText().equals("")) {
+
+                 if (preDate.getText().equals("")) {
                     preDate.setDisable(false);
                 } else {
                     preDate.setDisable(true);
