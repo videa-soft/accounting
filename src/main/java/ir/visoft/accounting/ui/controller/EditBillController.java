@@ -122,6 +122,17 @@ public class EditBillController extends BaseController {
                     setLastBillId(maxBillRecord.get(0).getBillId());
 
                 }
+                if (preDate.getText().equals("")) {
+                    preDate.setDisable(false);
+                } else {
+                    preDate.setDisable(true);
+                }
+
+                if (preFigure.getText().equals("")) {
+                    preFigure.setDisable(false);
+                } else {
+                    preFigure.setDisable(true);
+                }
             }
         } catch (DatabaseOperationException e) {
             showOperationError();
