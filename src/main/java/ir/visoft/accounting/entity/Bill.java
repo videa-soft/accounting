@@ -27,7 +27,7 @@ public class Bill extends BaseEntity {
     @EntityField
     private Integer cunsumption;
     @EntityField
-    private Double abonman;
+    private Integer abonman;
     @EntityField
     private Integer reduction;
     @EntityField
@@ -40,9 +40,11 @@ public class Bill extends BaseEntity {
     private Integer finalAmount;
     @EntityField
     private Integer userId;
+    @EntityField
+    private Integer lastDebit;
 
 
-    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Double abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId) {
+    public Bill(Integer billId, Date preDate, Date currentDate, Integer preFigure, Integer currentFigure, Integer cunsumption, Integer abonman, Integer reduction, Integer services, Double costWater, Integer costBalance, Integer finalAmount, Integer userId, Integer lastDebit) {
 
         this.billId = billId;
         this.previousDate = preDate;
@@ -57,6 +59,7 @@ public class Bill extends BaseEntity {
         this.costBalance = costBalance;
         this.finalAmount = finalAmount;
         this.userId = userId;
+        this.lastDebit = lastDebit ;
     }
     
     public Bill(Integer userId) {
@@ -118,11 +121,11 @@ public class Bill extends BaseEntity {
         this.cunsumption = cunsumption;
     }
 
-    public Double getAbonman() {
+    public Integer getAbonman() {
         return abonman;
     }
 
-    public void setAbonman(Double abonman) {
+    public void setAbonman(Integer abonman) {
         this.abonman = abonman;
     }
 
@@ -172,6 +175,14 @@ public class Bill extends BaseEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getLastDebit() {
+        return lastDebit;
+    }
+
+    public void setLastDebit(Integer lastDebit) {
+        this.lastDebit = lastDebit;
     }
 
 

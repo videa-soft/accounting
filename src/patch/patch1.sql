@@ -35,12 +35,13 @@ CREATE TABLE BILL (
   previous_figure INT,
   current_figure INT,
   cunsumption INT,
-  abonman DOUBLE ,
+  abonman INT ,
   reduction INT,
   services INT,
   cost_water DOUBLE,
   cost_balance INT,
   final_amount INT,
+  last_debit INT,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES USER(user_id)
 );
